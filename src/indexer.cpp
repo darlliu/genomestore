@@ -54,7 +54,7 @@ void seqdb::import(const std::string &dirname) {
   load_db_();
 }
 
-void seqdb::import_scan(const std::string& dirname){
+void seqdb::import_scan(const std::string &dirname) {
   scan(dirname);
   load_db_();
 }
@@ -217,9 +217,7 @@ std::string seqdb::get(const size_t &l, const size_t &r) {
   return decoded_seq.substr(l - ll, r - l);
 };
 
-void seqdb::export_db_kch(const std::string &kdbname) {
-  export_db(kdbname);
-}
+void seqdb::export_db_kch(const std::string &kdbname) { export_db(kdbname); }
 
 void seqdb::export_db(const std::string &fp) {
   std::cerr << "Trying to serialize into " << fp << std::endl;
@@ -227,7 +225,7 @@ void seqdb::export_db(const std::string &fp) {
   if (!ofs.is_open())
     throw("open error (export db): " + fp);
   json j;
-  j["name"] = json(name); 
+  j["name"] = json(name);
   j["dbpath"] = json(dbpath);
   j["chunksz"] = json(chunksz);
   j["chrs"] = json(chrs);
@@ -238,10 +236,9 @@ void seqdb::export_db(const std::string &fp) {
   j["faptahs"] = json(fapaths);
   j["dbpaths"] = json(dbpaths);
   j["scaffold"] = json(scaffold);
-  j["assemble"] = json(assemble); 
-  ofs << j ;
+  j["assemble"] = json(assemble);
+  ofs << j;
   std::cerr << "Writing out SeqDB ... " << std::endl;
-
 };
 void seqdb::load_sizes(std::ifstream &ifs) {
   std::string ch;
@@ -250,13 +247,15 @@ void seqdb::load_sizes(std::ifstream &ifs) {
   ss << ifs.rdbuf();
   while (ss.good()) {
     ss >> ch;
-    if(!ss.good()) break;
+    if (!ss.good())
+      break;
     ss >> pos;
     shifts[ch] = pos;
     ss >> pos;
     sizes[ch] = pos;
     chrs.push_back(ch);
-    //std::cerr << "Loaded sizes:"<<ch <<", "<<shifts[ch]<<", "<<sizes[ch]<<std::endl;
+    // std::cerr << "Loaded sizes:"<<ch <<", "<<shifts[ch]<<",
+    // "<<sizes[ch]<<std::endl;
   }
   ifs.close();
   return;
@@ -311,6 +310,6 @@ void seqdb::load_db(const std::string &fp) {
   load_db_();
 };
 
-void seqdb::load_db_kch(const std::string &kdbname, const std::string &key) {
-  // TBI
+void seqdb::load_db_kch(const std::string &kdbname, const std::string &key){
+    // TBI
 };

@@ -1,8 +1,7 @@
 cmake_minimum_required(VERSION 2.6)
-project(genomestore)
 
-#set(CMAKE_CXX_COMPILER "clang++")
-set(CMAKE_GENERATOR Visual Studio 15 2017 Win64)
+project(genomestore)
+set(CMAKE_GENERATOR "Visual Studio 15 2017 Win64")
 #set(CMAKE_CXX_FLAGS "-O -std=c++1y")
 # set(CMAKE_CXX_COMPILER "clang++")
 # set(CMAKE_CXX_FLAGS "-O3 -std=c++1y")

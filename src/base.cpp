@@ -6,27 +6,29 @@
 #include "base.hpp"
 #define E(expr) CHECK((rc = (expr)) == MDB_SUCCESS, #expr)
 #define RES(err, expr) ((rc = expr) == (err) || (CHECK(!rc, #expr), 0))
-#define CHECK(test, msg) ((test) ? (void)0 : ((void)fprintf(stderr, \
-	"%s:%d: %s: %s\n", __FILE__, __LINE__, msg, mdb_strerror(rc)), abort()))
+#define CHECK(test, msg)                                                       \
+  ((test) ? (void)0                                                            \
+          : ((void)fprintf(stderr, "%s:%d: %s: %s\n", __FILE__, __LINE__, msg, \
+                           mdb_strerror(rc)),                                  \
+             abort()))
 
-
-std::string replace(std::string& in, const char * pat, 
-  const char * rep, bool right = false){
-    // this function replaces one LEFTMOST or RIGHTMOST substr of an input
-    // it does NOT do whole string replacements
-    auto pos = in.find (pat);
-    if(right){
-      pos = in.rfind(pat);
-    }
-    std::string out ;
-    if (right) {
-      out = in.substr(0, pos) + std::string(rep);
-    } else {
-      out = std::string(rep) + in.substr(pos);
-    }
-    in = out;
-    return out;
+std::string replace(std::string &in, const char *pat, const char *rep,
+                    bool right = false) {
+  // this function replaces one LEFTMOST or RIGHTMOST substr of an input
+  // it does NOT do whole string replacements
+  auto pos = in.find(pat);
+  if (right) {
+    pos = in.rfind(pat);
   }
+  std::string out;
+  if (right) {
+    out = in.substr(0, pos) + std::string(rep);
+  } else {
+    out = std::string(rep) + in.substr(pos);
+  }
+  in = out;
+  return out;
+}
 
 char encode_char(char *in) {
   std::bitset<8> bs;
@@ -134,10 +136,11 @@ std::string decode_seq(char *in, unsigned size) {
 std::string print_interval(const interval &in) {
   char out[256];
   auto seq = in.seq;
-  if (seq.size()>50) seq = seq.substr(0, 50) + "..";
-  auto fm = sprintf(out,
-      "[%s, %s]: (%d, %d) @ %s @ {score: %f , strand: %d}", 
-      in.ref.c_str(), in.chr.c_str() , in.l ,  in.r , seq.c_str(), in.score , (int)in.strand);
+  if (seq.size() > 50)
+    seq = seq.substr(0, 50) + "..";
+  auto fm = sprintf(out, "[%s, %s]: (%d, %d) @ %s @ {score: %f , strand: %d}",
+                    in.ref.c_str(), in.chr.c_str(), in.l, in.r, seq.c_str(),
+                    in.score, (int)in.strand);
   return std::string(out);
 }
 
@@ -186,45 +189,49 @@ std::string get_reverse_comp(const std::string &in) {
   return out;
 };
 
-void basedb::dbinit(ldb& dbenv, const std::string& dbpath){
-    int rc;
-		E(mdb_env_create(&dbenv.env));
-		E(mdb_env_set_maxreaders(dbenv.env, 1));
-		E(mdb_env_set_mapsize(dbenv.env, 2<<31));
-		E(mdb_env_open(dbenv.env, dbpath.c_str(), MDB_FIXEDMAP /*|MDB_NOSYNC*/, 0664));
-		E(mdb_txn_begin(dbenv.env, NULL, 0, &dbenv.txn));
-    E(mdb_dbi_open(dbenv.txn, NULL, 0, &dbenv.dbi));
-    // opens the db connection as in mtest.c
-    return;
+void basedb::dbinit(ldb &dbenv, const std::string &dbpath) {
+  int rc;
+  E(mdb_env_create(&dbenv.env));
+  E(mdb_env_set_maxreaders(dbenv.env, 1));
+  E(mdb_env_set_mapsize(dbenv.env, 2 << 31));
+  E(mdb_env_open(dbenv.env, dbpath.c_str(), MDB_FIXEDMAP /*|MDB_NOSYNC*/,
+                 0664));
+  E(mdb_txn_begin(dbenv.env, NULL, 0, &dbenv.txn));
+  E(mdb_dbi_open(dbenv.txn, NULL, 0, &dbenv.dbi));
+  // opens the db connection as in mtest.c
+  return;
 }
 
-void basedb::setdb(ldb& dbenv, const std::string& key, const std::string& val, bool append , int& cnt ){
-    int rc;
-    MDB_val mkey, mdata;
-    mkey.mv_size = key.size()*sizeof(char);
-    mkey.mv_data = (void*)key.data();
+void basedb::setdb(ldb &dbenv, const std::string &key, const std::string &val,
+                   bool append, int &cnt) {
+  int rc;
+  MDB_val mkey, mdata;
+  mkey.mv_size = key.size() * sizeof(char);
+  mkey.mv_data = (void *)key.data();
 
-    mdata.mv_size = val.size()*sizeof(char);
-    mdata.mv_data = (void*)val.data();
+  mdata.mv_size = val.size() * sizeof(char);
+  mdata.mv_data = (void *)val.data();
 
-    if (append) E(mdb_put(dbenv.txn, dbenv.dbi, &mkey, &mdata, 0|MDB_APPENDDUP));
-    else E(mdb_put(dbenv.txn, dbenv.dbi, &mkey, &mdata, 0));
-    if (cnt ++ > 1000){
-       E(mdb_txn_commit(dbenv.txn));
-       cnt = 0; //forces a sync every 1000 writes
-    };
-    return;
+  if (append)
+    E(mdb_put(dbenv.txn, dbenv.dbi, &mkey, &mdata, 0 | MDB_APPENDDUP));
+  else
+    E(mdb_put(dbenv.txn, dbenv.dbi, &mkey, &mdata, 0));
+  if (cnt++ > 1000) {
+    E(mdb_txn_commit(dbenv.txn));
+    cnt = 0; // forces a sync every 1000 writes
+  };
+  return;
 }
 
-std::string basedb::getdb(ldb& dbenv, const std::string& key){
-    int rc;
-    MDB_val mkey, mdata;
-    mkey.mv_size = key.size()*sizeof(char);
-    mkey.mv_data = (void*)key.data();
+std::string basedb::getdb(ldb &dbenv, const std::string &key) {
+  int rc;
+  MDB_val mkey, mdata;
+  mkey.mv_size = key.size() * sizeof(char);
+  mkey.mv_data = (void *)key.data();
 
-    E(mdb_get(dbenv.txn, dbenv.dbi, &mkey, &mdata));
-    int sz = mdata.mv_size / sizeof(char);
-    std::string out ((char*)mdata.mv_data, sz);
-    return out;
+  E(mdb_get(dbenv.txn, dbenv.dbi, &mkey, &mdata));
+  int sz = mdata.mv_size / sizeof(char);
+  std::string out((char *)mdata.mv_data, sz);
+  return out;
 }
 #endif

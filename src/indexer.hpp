@@ -12,14 +12,13 @@
 #include "base.hpp"
 #include <sstream>
 
-
 class seqdb {
 
 public:
   seqdb(const std::string &name, const size_t &sz,
         const std::string &dbp = "./test")
-      : name(name), chunksz(sz), dbpath(dbp), chr(""),
-        assemble(false), scaffold(false){};
+      : name(name), chunksz(sz), dbpath(dbp), chr(""), assemble(false),
+        scaffold(false){};
   seqdb() : seqdb("default", 1e4){};
   ~seqdb() {
     close_db(dbs);
@@ -40,8 +39,8 @@ public:
   };
   virtual std::string get(const std::string &chr, const size_t &l,
                           const size_t &r) {
-    if (sizes.count(chr)==0 || sizes[chr]<= r || r <= l)
-        return "";
+    if (sizes.count(chr) == 0 || sizes[chr] <= r || r <= l)
+      return "";
     set_chr(chr);
     return get(l, r);
   };
@@ -64,9 +63,7 @@ public:
   virtual size_t get_index(const size_t &idx) {
     return idx / chunksz * chunksz;
   };
-  void serialize(const std::string & fname) {
-    export_db(fname);
-  };
+  void serialize(const std::string &fname) { export_db(fname); };
   size_t chunk_sz() { return chunksz; };
 
   std::string name,
