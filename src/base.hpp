@@ -7,7 +7,6 @@
 #include <bitset>
 #include <cmath>
 #include <cstdio>
-#include <experimental/filesystem>
 #include <fstream>
 #include <iostream>
 #include <lmdb.h>
@@ -16,6 +15,12 @@
 #include <nlohmann/json.hpp>
 #include <string>
 #include <vector>
+
+#if defined(WIN32)  || defined(_WIN32) || defined(__WIN32) && !defined(__CYGWIN__)
+#include <experimental/filesystem>
+#else
+#include <filesystem>
+#endif
 
 using json = nlohmann::json;
 
