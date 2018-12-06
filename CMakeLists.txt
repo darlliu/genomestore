@@ -17,7 +17,7 @@ ELSEIF(APPLE)
 ELSEIF(UNIX AND NOT APPLE)
     set(PYTHON_LIBRARY   "/usr/lib/python3.6")
     set(PYTHON_INCLUDE_DIR   "/usr/include/python3.6m")
-    set(CMAKE_CXX_FLAGS "-O3 -std=c++17 -fPIC -lm")
+    set(CMAKE_CXX_FLAGS "-O3 -std=c++17 -fPIC -lm -lstdc++fs")
 ENDIF()
 
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "../bin")
@@ -34,7 +34,7 @@ INCLUDE_DIRECTORIES(
 LINK_DIRECTORIES(
     )
 
-
+FIND_PACKAGE(PythonLibs 3.7)
 
 message("Configuring core C++ binaries")
 # file (GLOB MOODS_SRC 
@@ -43,7 +43,6 @@ message("Configuring core C++ binaries")
 #     )
 # add_library(moods SHARED ${MOODS_SRC})
 # INCLUDE_DIRECTORIES ("${SOURCE_DIR}/MOODS")
-FIND_PACKAGE(PythonLibs 3.7)
 add_library(llmdb ${LMDB_DIR}/midl.c ${LMDB_DIR}/lmdb.h ${LMDB_DIR}/mdb.c)
 add_library(lmdb SHARED ${LMDB_DIR}/midl.c ${LMDB_DIR}/lmdb.h ${LMDB_DIR}/mdb.c)
 add_library(lindexer ${SOURCE_DIR}/indexer.cpp ${SOURCE_DIR}/base.cpp)
@@ -52,8 +51,8 @@ IF(WIN32)
     target_link_libraries(lindexer llmdb)
     target_link_libraries(indexer llmdb)
 ELSE()
-    target_link_libraries(lindexer lmdb)
-    target_link_libraries(indexer lmdb)
+    target_link_libraries(lindexer lmdb stdc++fs)
+    target_link_libraries(indexer lmdb stdc++fs)
 ENDIF()
 # add_executable(mafslice.exe ${SOURCE_DIR}/main.cpp)
 # target_link_libraries(mafslice.exe indexer boost_program_options)
