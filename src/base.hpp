@@ -15,13 +15,13 @@
 #include <nlohmann/json.hpp>
 #include <string>
 #include <vector>
+#include <catch.hpp>
 
 #if defined(WIN32)  || defined(_WIN32) || defined(__WIN32) && !defined(__CYGWIN__)
 #include <experimental/filesystem>
 #else
 #include <experimental/filesystem>
 #endif
-
 using json = nlohmann::json;
 
 typedef std::vector<size_t> INDICES;
@@ -94,6 +94,7 @@ public:
   void dbinit() {
     dbinit(dbenv, dbpath + "/" + name + ".ldb");
   }; // default to one db
+  ldb  getldb() const { return dbenv; };
   void setdb(const std::string &key, const std::string &val,
              bool append = false) {
     setdb(dbenv, key, val, append, cnt);
