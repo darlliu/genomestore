@@ -190,8 +190,8 @@ void basedb::dbinit(ldb &dbenv, const std::string &dbpath) {
   int rc;
   E(mdb_env_create(&dbenv.env));
   E(mdb_env_set_maxreaders(dbenv.env, 1));
-  E(mdb_env_set_mapsize(dbenv.env, 2 << 30));
-  E(mdb_env_open(dbenv.env, dbpath.c_str(), MDB_FIXEDMAP /*|MDB_NOSYNC*/,
+  E(mdb_env_set_mapsize(dbenv.env, 2 << 18));
+  E(mdb_env_open(dbenv.env, dbpath.c_str(), MDB_NOSUBDIR /*|MDB_NOSYNC*/,
                  0664));
   E(mdb_txn_begin(dbenv.env, NULL, 0, &dbenv.txn));
   E(mdb_dbi_open(dbenv.txn, NULL, 0, &dbenv.dbi));

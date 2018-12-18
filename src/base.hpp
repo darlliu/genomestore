@@ -15,7 +15,7 @@
 #include <nlohmann/json.hpp>
 #include <string>
 #include <vector>
-#include <catch.hpp>
+#include <catch2/catch.hpp>
 
 #if defined(WIN32)  || defined(_WIN32) || defined(__WIN32) && !defined(__CYGWIN__)
 #include <experimental/filesystem>
@@ -83,7 +83,6 @@ public:
     mdb_cursor_close(dbenv.cursor);
     mdb_txn_abort(dbenv.txn);
     mdb_dbi_close(dbenv.env, dbenv.dbi);
-    mdb_env_close(dbenv.env);
   };
   void dbinit(ldb &dbenv,
               const std::string &dbpath); // should be called by all derived
@@ -92,9 +91,9 @@ public:
              bool append, int &cnt);
   std::string getdb(ldb &dbenv, const std::string &key);
   void dbinit() {
-    dbinit(dbenv, dbpath + "/" + name + ".ldb");
+    dbinit(dbenv, dbpath+"_ldb");
   }; // default to one db
-  ldb  getldb() const { return dbenv; };
+  const ldb getldb() const { return dbenv; };
   void setdb(const std::string &key, const std::string &val,
              bool append = false) {
     setdb(dbenv, key, val, append, cnt);
