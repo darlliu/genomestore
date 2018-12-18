@@ -3,11 +3,10 @@
 #include "base.hpp"
 #define E(expr) CHECKLMDB((rc = (expr)) == MDB_SUCCESS, #expr)
 #define RES(err, expr) ((rc = expr) == (err) || (CHECKLMDB(!rc, #expr), 0))
-#define CHECKLMDB(test, msg)                                                       \
-  ((test) ? (void)0                                                            \
-          : ((void)fprintf(stderr, "%s:%d: %s: %s\n", __FILE__, __LINE__, msg, \
-                           mdb_strerror(rc)),                                  \
-             abort()))
+#define CHECKLMDB(test, msg)                                                   \
+  ((test) ? (void)0 : ((void)fprintf(stderr, "%s:%d: %s: %s\n", __FILE__,      \
+                                     __LINE__, msg, mdb_strerror(rc)),         \
+                       abort()))
 
 std::string replace(std::string &in, const char *pat, const char *rep,
                     bool right = false) {
@@ -234,13 +233,10 @@ std::string basedb::getdb(ldb &dbenv, const std::string &key) {
 
 TEST_CASE("TESTING BASE DB IO FUNCTIONS") {
   auto bdb = basedb("testdb", "test.db");
-  SECTION("TESTING DB INITIALIZATION") {
-    REQUIRE(bdb.getldb().txn != nullptr);
-  }
+  SECTION("TESTING DB INITIALIZATION") { REQUIRE(bdb.getldb().txn != nullptr); }
   SECTION("TESTING DB PUT STRING KEY AND VAL") {
     bdb.setdb("testkey", "testval");
     auto msg = bdb.getdb("testkey");
-    REQUIRE( msg == "testval" );
+    REQUIRE(msg == "testval");
   }
-  
 }

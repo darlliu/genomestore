@@ -17,7 +17,8 @@
 #include <vector>
 #include <catch2/catch.hpp>
 
-#if defined(WIN32)  || defined(_WIN32) || defined(__WIN32) && !defined(__CYGWIN__)
+#if defined(WIN32) || defined(_WIN32) ||                                       \
+    defined(__WIN32) && !defined(__CYGWIN__)
 #include <experimental/filesystem>
 #else
 #include <experimental/filesystem>
@@ -90,9 +91,7 @@ public:
   void setdb(ldb &dbenv, const std::string &key, const std::string &val,
              bool append, int &cnt);
   std::string getdb(ldb &dbenv, const std::string &key);
-  void dbinit() {
-    dbinit(dbenv, dbpath+"_ldb");
-  }; // default to one db
+  void dbinit() { dbinit(dbenv, dbpath + "_ldb"); }; // default to one db
   const ldb getldb() const { return dbenv; };
   void setdb(const std::string &key, const std::string &val,
              bool append = false) {
