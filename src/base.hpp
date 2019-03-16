@@ -24,10 +24,10 @@
 #endif
 using json = nlohmann::json;
 
-typedef std::vector<size_t> INDICES;
+typedef std::vector<uint32_t> INDICES;
 typedef std::unordered_map<std::string, INDICES> INDEXMAP;
 typedef std::unordered_map<std::string, std::string> NAMES;
-typedef std::unordered_map<std::string, size_t> SIZES;
+typedef std::unordered_map<std::string, uint32_t> SIZES;
 
 typedef enum {
   increment = 0,
@@ -53,10 +53,6 @@ struct ldb {
   MDB_cursor_op op;
 };
 
-std::string replace(std::string &, const char *, const char *, bool);
-
-#define replace_last(in, pat, rep) replace(in, pat, rep, true)
-
 char encode_char(char *in);
 void decode_char(const char &in, char *out);
 void encode_seq(std::string in, char *out);
@@ -73,16 +69,8 @@ class basedb {
   // LDB IO class for sequence db, alignment db, annotation db, and SNP db
 
 public:
-  basedb(const std::string &name, const std::string &dbpath)
-      : name(name), dbpath(dbpath) {
-    dbinit();
-  };
-  ~basedb() {
-    // do a few cleaning ops, don't care if fails
-    mdb_txn_commit(dbenv.txn);
-    mdb_txn_abort(dbenv.txn);
-    mdb_dbi_close(dbenv.env, dbenv.dbi);
-  };
+  basedb(const std::string &name, const std::string &dbpath);
+  ~basedb();
   void dbinit(ldb &dbenv,
               const std::string &dbpath); // should be called by all derived
                                           // classes, will use dbpath, name

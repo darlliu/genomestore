@@ -1,12 +1,27 @@
 #include "indexer.hpp"
+using namespace std::experimental::filesystem;
+
+seqdb::~seqdb() {
+  close_db(dbs);
+  for (auto &it : dbs_fsq) {
+    it.second->close();
+  }
+}
+
+std::string seqdb::get(const std::string &chr, const uint32_t &l,
+                       const uint32_t &r) {
+  if (sizes.count(chr) == 0 || sizes[chr] <= r || r <= l)
+    return "";
+  set_chr(chr);
+  return get(l, r);
+}
 
 void seqdb::scan(const std::string &dirname) {
-  using namespace std::experimental::filesystem;
-  auto fp = path(dirname);
+  auto dp = path(dirname);
   chrs.clear();
-  std::vector<std::string> fps, fns;
+  std::vector<path> fps;
   try {
-    if (exists(fp) && is_directory(fp)) {
+    if (exists(dp) && is_directory(dp)) {
       std::cerr << " Now reading " << dirname << std::endl;
     } else
       throw("Path does not exist: " + dirname);
@@ -14,31 +29,24 @@ void seqdb::scan(const std::string &dirname) {
     std::cerr << "Error opening path " << dirname << std::endl;
     throw(ex);
   }
-  for (auto it = directory_iterator(fp); it != directory_iterator(); ++it) {
-
+  for (auto it = directory_iterator(dp); it != directory_iterator(); ++it) {
     if (!is_directory(it->path())) {
-      auto fp = it->path().string();
-      if (fp.find(".fa") == std::string::npos)
+      auto fp = it->path();
+      if (fp.extension().string().find("fa") == std::string::npos)
         continue;
-      std::cout << "Found fasta file : " << fp << std::endl;
+      std::cout << "Found fasta file : " << fp.filename() << std::endl;
       fps.push_back(fp);
-      fns.push_back(it->path().filename().string());
-
     } else {
       std::cout << "skipping directory : " << it->path().filename()
                 << std::endl;
     }
   }
   std::cout << "Found files count: " << fps.size() << std::endl;
-  for (std::string fn : fns) {
-    replace_last(fn, ".fasta", "");
-    replace_last(fn, ".fa", "");
-    chrs.push_back(fn);
-  }
   for (unsigned i = 0; i < fps.size(); ++i) {
-    auto chr = chrs[i];
-    auto chrp = fps[i];
-    fapaths[chr] = chrp;
+    auto fp = fps[i];
+    auto chr = fp.filename().stem().string();
+    chrs.push_back(chr);
+    fapaths[chr] = fp.string();
     auto dbp = dbpath + "/" + chr + ".fsq";
     dbpaths[chr] = dbp;
   }
@@ -46,8 +54,7 @@ void seqdb::scan(const std::string &dirname) {
 
 void seqdb::import(const std::string &dirname) {
   scan(dirname);
-  for (unsigned i = 0; i < chrs.size(); ++i) {
-    auto chr = chrs[i];
+  for (auto &chr : chrs) {
     set_chr(chr);
     import_chr_fsq();
   }
@@ -60,34 +67,29 @@ void seqdb::import_scan(const std::string &dirname) {
 }
 
 void seqdb::import_chr(const std::string &fname) {
-  using namespace std::experimental::filesystem;
   auto fp = path(fname);
-  if (exists(fp) && fname.find(".fa") != std::string::npos) {
+  if (exists(fp) && fp.extension().string().find("fa") != std::string::npos) {
     std::cerr << " Now reading " << fname << std::endl;
   } else
-    throw("File does not exist: " + fname);
-  auto fn = fp.filename().string();
+    throw("File does not exist or wrong type: " + fname);
   fapaths[chr] = fp.string();
-  replace_last(fn, ".fasta", "");
-  replace_last(fn, ".fa", "");
-  chrs.push_back(fn);
-  set_chr(fn);
-  fapaths[chr] = fp.string();
+  auto chr = fp.filename().stem().string();
+  chrs.push_back(chr);
+  set_chr(chr);
   auto dbp = dbpath + "/" + chr + ".fsq";
   import_chr_fsq();
   return;
 }
 void seqdb::import_chr_fsq() {
-  auto chrfp = fapaths[chr];
-  auto dbp = dbpaths[chr];
+  auto chrfp = path(fapaths[chr]);
+  auto dbp = path(dbpaths[chr]);
   std::ofstream dbf1(dbp, std::ofstream::binary);
-  replace_last(dbp, ".fsq", ".szi");
+  dbp.replace_extension("szi");
   std::ofstream dbf2(dbp, std::ofstream::binary);
   std::ifstream ifs(chrfp);
-
   if (!ifs.is_open() || !dbf1.is_open() || !dbf2.is_open())
     throw("Error Opening file import sequence!");
-  size_t idx = 0;
+  uint32_t idx = 0;
   std::string tmp = "", line;
   std::cout << "Opened file " << chrfp << " On chr: " << chr << std::endl;
   while (std::getline(ifs, line)) {
@@ -99,13 +101,15 @@ void seqdb::import_chr_fsq() {
   auto buf = new char[(tmp.size() + 1) / 2];
   encode_seq(tmp, buf);
   auto pos = dbf1.tellp();
+  assert(pos < UINT32_MAX);
   dbf1.write(buf, (tmp.size() + 1) / 2);
   if ((!assemble) && !(dbf1.good()))
     throw("Error writing to a 4bit sequence " + chr);
   dbf1.close();
-  idx += tmp.size();
+  assert(tmp.size() < UINT32_MAX);
+  idx += static_cast<uint32_t>(tmp.size());
   sizes[chr] = idx;
-  shifts[chr] = pos;
+  shifts[chr] = static_cast<uint32_t>(pos);
   dbf2 << (chr + " " + std::to_string(pos) + " " + std::to_string(idx) + " ");
   std::cout << "Loaded length " << idx << std::endl;
   dbf2.close();
@@ -115,23 +119,25 @@ void seqdb::import_chr_fsq() {
 
 void seqdb::import_feed() {
   std::cerr << "..... Now importing from stdin ....." << std::endl;
-  std::string line, tmp(""), dbp;
+  std::string line, tmp("");
   std::ofstream dbf1, dbf2;
+  path dbp;
   if (scaffold) {
-    dbp = dbpath + "/" + name + ".fsq";
+    dbp = path(dbpath + "/" + name + ".fsq");
     dbf1.open(dbp, std::ofstream::binary);
-    dbpaths[name] = dbp;
-    replace_last(dbp, ".fsq", ".szi");
+    dbpaths[name] = dbp.string();
+    dbp.replace_extension("szi");
     dbf2.open(dbp, std::ofstream::binary);
   }
-  size_t idx = 0;
+  uint32_t idx = 0;
   bool flag = false;
   auto inner = [&]() {
     auto buf = new char[(tmp.size() + 1) / 2];
     encode_seq(tmp, buf);
     auto pos = dbf1.tellp();
     dbf1.write(buf, (tmp.size() + 1) / 2);
-    idx += tmp.size();
+    assert(tmp.size() < UINT32_MAX);
+    idx += static_cast<uint32_t>(tmp.size());
     dbf2 << (chr + " " + std::to_string(pos) + " " + std::to_string(idx) + " ");
     std::cout << "Loaded length " << idx << std::endl;
     idx = 0;
@@ -152,10 +158,10 @@ void seqdb::import_feed() {
       if (!scaffold) {
         dbf1.close();
         dbf2.close();
-        dbp = dbpath + "/" + chr + ".fsq";
-        dbpaths[chr] = dbp;
+        dbp = path(dbpath + "/" + chr + ".fsq");
+        dbpaths[chr] = dbp.string();
         dbf1.open(dbp, std::ofstream::binary);
-        replace_last(dbp, ".fsq", ".szi");
+        dbp.replace_extension("szi");
         dbf2.open(dbp, std::ofstream::binary);
       }
       flag = true;
@@ -171,23 +177,11 @@ void seqdb::import_feed() {
   return;
 }
 
-void seqdb::init_db(const std::vector<std::string> &chrs, DB &dbs) {
-  // if (dbs.size() > 0)
-  //   close_db(dbs);
-  // std::cout << "Initializing DBs, length: " << chrs.size() << std::endl;
-  // for (auto chr : chrs) {
-  //   dbs[chr].push_back(std::shared_ptr<basedb>(new basedb()));
-  // }
-  return;
-};
-
-std::string seqdb::get(const size_t &l, const size_t &r) {
+std::string seqdb::get(const uint32_t &l, const uint32_t &r) {
   if (r < l)
     throw("Interval incorrect!");
   std::shared_ptr<std::ifstream> db;
   unsigned pos = 0;
-  // std::cerr <<"Trying to get "<<scaffold <<" "<<l <<", "<<r<<", "<<pos <<",
-  // "<<sizes[chr]<<std::endl;
   if (scaffold) {
     db = dbs_fsq[name];
     pos = shifts[chr];
@@ -206,18 +200,12 @@ std::string seqdb::get(const size_t &l, const size_t &r) {
   db->seekg(0, db->beg); // seek back
   db->seekg(pos + ll2, db->beg);
   auto buf = new char[rr2 - ll2];
-  // std::cerr <<"Reading file for get "<<ll2<<", "<<rr2<<" from
-  // "<<pos<<"total"<<rr2-ll2<<std::endl;
   db->read(buf, rr2 - ll2);
   db->sync();
-  // std::cerr <<"Decoding string for get count "<<db->gcount()<<std::endl;
   std::string decoded_seq = decode_seq(buf, rr2 - ll2);
   delete[] buf;
-  // std::cerr <<"returning substr from" <<decoded_seq<<std::endl;
   return decoded_seq.substr(l - ll, r - l);
 };
-
-void seqdb::export_db_kch(const std::string &kdbname) { export_db(kdbname); }
 
 void seqdb::export_db(const std::string &fp) {
   std::cerr << "Trying to serialize into " << fp << std::endl;
@@ -254,8 +242,6 @@ void seqdb::load_sizes(std::ifstream &ifs) {
     ss >> pos;
     sizes[ch] = pos;
     chrs.push_back(ch);
-    // std::cerr << "Loaded sizes:"<<ch <<", "<<shifts[ch]<<",
-    // "<<sizes[ch]<<std::endl;
   }
   ifs.close();
   return;
@@ -273,10 +259,10 @@ void seqdb::load_db_() {
     load_sizes(*dbs_fsz[name]);
   } else {
     for (auto it : dbpaths) {
-      auto dbp = it.second;
+      auto dbp = path(it.second);
       dbs_fsq[it.first] =
           std::shared_ptr<std::ifstream>(new std::ifstream(dbp));
-      replace_last(dbp, ".fsq", ".szi");
+      dbp.replace_extension("szi");
       dbs_fsz[it.first] =
           std::shared_ptr<std::ifstream>(new std::ifstream(dbp));
       if (!dbs_fsq[it.first]->good() || !dbs_fsz[it.first]->good())
@@ -296,7 +282,7 @@ void seqdb::load_db(const std::string &fp) {
   ifs >> j;
   name = j["name"].get<std::string>();
   dbpath = j["dbpath"].get<std::string>();
-  chunksz = j["chunksz"].get<size_t>();
+  chunksz = j["chunksz"].get<uint32_t>();
   chrs = j["chrs"].get<std::vector<std::string>>();
   indices = j["indices"].get<INDEXMAP>();
   sizes = j["sizes"].get<SIZES>();
@@ -308,8 +294,4 @@ void seqdb::load_db(const std::string &fp) {
   assemble = j["assemble"].get<bool>();
   std::cerr << "Loading SeqDB ... " << std::endl;
   load_db_();
-};
-
-void seqdb::load_db_kch(const std::string &kdbname, const std::string &key){
-    // TBI
 };

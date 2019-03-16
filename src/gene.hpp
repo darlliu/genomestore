@@ -1,84 +1,73 @@
 #ifndef GENE
 #define GENE
-#include <genome.hpp>
+#include <genomestore.pb.h>
 #include <indexer.hpp>
 #include <set>
 
+/**
+ * Goals intervals, genes and store genes by genomes
+ * 1, store refgenes into individual genes, serialize/unserialize ids
+ * 2, initialize interval from genes, serialize genes and intervals
+ * 3, initialize a multiset from gene ids
+ **/
+
 struct inv {
-  std::string chr;
-  unsigned start, end;
-  bool strand;
-  std::string seq;
+  inv() { _inv.set_len(-1); };
+  inv(uint32_t start, uint32_t len, bool strand) {
+    _inv.set_begin(start);
+    _inv.set_len(len);
+    _inv.set_strand(strand);
+  }
+  inv(const std::string &ref, const std::string &chr, uint32_t start,
+      uint32_t len, bool strand) {
+    inv(start, len, strand);
+    _inv.set_ref(ref);
+    _inv.set_chr(chr);
+  };
+  const uint32_t &start() { return _inv.get_start(); };
+  const uint32_t &len() { return _inv.get_len(); };
+  const uint32_t &end() { return _inv.get_start() + _inv.get_len(); };
+  const bool &strand() { return _inv.get_strand(); };
+  const std::string &ref() { return _inv.get_ref(); };
+  const std::string &chr() { return _inv.get_chr(); };
+  const std::string &seqs() { return _inv.get_seqs(); };
   bool operator==(const inv &another) {
-    return ((chr == another.chr) && (start == another.start) &&
-            (end == another.end) && (strand == another.strand));
+    return ((ref() == another.ref()) && (chr() == another.chr()) &&
+            (start() == another.start()) && (len() == another.len()) &&
+            (strand() == another.strand()));
   };
   bool operator!=(const inv &another) { return !((*this) == (another)); };
-};
-
-struct interval {
-  // note that intervals are "unsigned"
-  // and only count absolute pos on + strand
-
-public:
-  interval(seqdb *sdb, const unsigned &chr_, const unsigned &start,
-           const unsigned &end, const unsigned &idx, bool strand)
-      : sdb(sdb), chr_(chr_), start(start), end(end), idx(idx),
-        strand(strand){};
-  interval(){};
-  unsigned start = 0, end = 0, idx = 0, chr_ = 0;
-  bool strand;
-  std::string chr() const { return sdb->chrs[chr_]; };
-  std::string ref() const { return sdb->name; };
-  unsigned long sz() const { return sdb->sizes[chr()]; };
-  std::string seq(int offset = 0) {
-    if (offset)
-      return sdb->get(chr(), start, start + offset);
-    else
-      return sdb->get(chr(), start, end);
-  };
-  inv v() { return inv{chr(), start, end, strand, seq()}; };
-  bool empty() { return (start | end | idx); };
   std::string info() {
     char tmp[256];
-    auto fm = sprintf(tmp, "[%s, %s]: (%d, %d) @ %s @ {index: %d , strand: %d}",
-                      ref().c_str(), chr().c_str(), start, end, seq(50).c_str(),
-                      idx, (int)strand);
+    auto fm = sprintf(tmp, "[%s, %s]: (%d, %d) @ %s @ {strand: %d}",
+                      ref().c_str(), chr().c_str(), start(), end(),
+                      seqs().substr(50).c_str(), (int)strand());
     return std::string(tmp);
   };
-  bool operator==(const interval &another) {
-    return ((chr() == another.chr()) && (start == another.start) &&
-            (end == another.end) && (strand == another.strand));
-  };
-  bool operator!=(const interval &another) { return !((*this) == (another)); };
-
-private:
-  seqdb *sdb = nullptr;
-};
-
-struct intervalCmp {
-  bool operator()(const interval &l, const interval &r) {
-    if (l.chr() != r.chr())
-      return l.chr() < r.chr();
-    if (r.start > l.end)
+  bool operator<(const inv &another) {
+    if (chr() != another.chr())
+      return chr() < another.chr();
+    if (another.start() > end())
       return true;
-    if (r.end < l.start)
+    if (another.end() < start())
       return false;
-    return (l.start < r.start);
-  };
+    return (start() < another.start());
+  }
+  Interval _inv;
 };
 
-bool combine_intervals(interval &left, interval &right) {
-  if (left.ref().find(right.ref()) == std::string::npos)
-    return false;
-  if (left.chr().find(right.chr()) == std::string::npos)
-    return false;
-  if (left.start > right.start)
-    left.start = right.start;
-  if (left.end < right.end)
-    left.end = right.end;
-  return true;
-}
+// bool combine_intervals(interval &left, interval &right) {
+//   if (left.ref().find(right.ref()) == std::string::npos)
+//     return false;
+//   if (left.chr().find(right.chr()) == std::string::npos)
+//     return false;
+//   if (left.start > right.start)
+//     left.start = right.start;
+//   if (left.end < right.end)
+//     left.end = right.end;
+//   return true;
+// }
+
 class gene {
 private:
   seqdb *sdb = nullptr;

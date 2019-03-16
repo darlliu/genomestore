@@ -9,24 +9,6 @@
                            mdb_strerror(rc)),                                  \
              abort()))
 
-std::string replace(std::string &in, const char *pat, const char *rep,
-                    bool right = false) {
-  // this function replaces one LEFTMOST or RIGHTMOST substr of an input
-  // it does NOT do whole string replacements
-  auto pos = in.find(pat);
-  if (right) {
-    pos = in.rfind(pat);
-  }
-  std::string out;
-  if (right) {
-    out = in.substr(0, pos) + std::string(rep);
-  } else {
-    out = std::string(rep) + in.substr(pos);
-  }
-  in = out;
-  return out;
-}
-
 char encode_char(char *in) {
   std::bitset<8> bs;
   // std::cerr <<"Encoding "<<bs << " from "<<in[0]<<in[1]<<std::endl;
@@ -185,6 +167,18 @@ std::string get_reverse_comp(const std::string &in) {
   }
   return out;
 };
+
+basedb::basedb(const std::string &name, const std::string &dbpath)
+    : name(name), dbpath(dbpath) {
+  dbinit();
+}
+
+basedb::~basedb() {
+  // do a few cleaning ops, don't care if fails
+  mdb_txn_commit(dbenv.txn);
+  mdb_txn_abort(dbenv.txn);
+  mdb_dbi_close(dbenv.env, dbenv.dbi);
+}
 
 void basedb::dbinit(ldb &dbenv, const std::string &dbpath) {
   int rc;
