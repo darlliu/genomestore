@@ -1,0 +1,36 @@
+syntax = "proto3";
+
+package genomestore;
+
+enum Base {
+    a = 0;
+    c = 1;
+    g = 2;
+    t = 3;
+    u = 4;
+    n = 5;
+}
+
+message Interval {
+    string ref = 1;
+    string chr = 2;
+    uint32 start = 3;
+    uint32 len = 4;
+    bool strand = 5;
+    repeated Base seq = 6;
+    string seqs = 7;
+    float score = 8;
+}
+
+message Gene {
+    string id = 1;
+    uint32 tx_start = 2;
+    uint32 tx_end = 3;
+    uint32 cds_start = 4;
+    uint32 cds_end = 5;
+    uint32 idx = 6;
+    bool strand = 7;
+    repeated Interval exons = 8;
+    repeated Interval introns = 9;
+}
+
