@@ -15,7 +15,6 @@
 #include <nlohmann/json.hpp>
 #include <string>
 #include <vector>
-#include <catch2/catch.hpp>
 
 #if defined(WIN32) || defined(_WIN32) ||                                       \
     defined(__WIN32) && !defined(__CYGWIN__)
@@ -81,7 +80,6 @@ public:
   ~basedb() {
     // do a few cleaning ops, don't care if fails
     mdb_txn_commit(dbenv.txn);
-    mdb_cursor_close(dbenv.cursor);
     mdb_txn_abort(dbenv.txn);
     mdb_dbi_close(dbenv.env, dbenv.dbi);
   };
