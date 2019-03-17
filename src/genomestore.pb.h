@@ -357,10 +357,10 @@ class Gene : public ::google::protobuf::Message /* @@protoc_insertion_point(clas
 
   // accessors -------------------------------------------------------
 
-  // repeated .genomestore.Interval exons = 8;
+  // repeated .genomestore.Interval exons = 7;
   int exons_size() const;
   void clear_exons();
-  static const int kExonsFieldNumber = 8;
+  static const int kExonsFieldNumber = 7;
   ::genomestore::Interval* mutable_exons(int index);
   ::google::protobuf::RepeatedPtrField< ::genomestore::Interval >*
       mutable_exons();
@@ -369,10 +369,10 @@ class Gene : public ::google::protobuf::Message /* @@protoc_insertion_point(clas
   const ::google::protobuf::RepeatedPtrField< ::genomestore::Interval >&
       exons() const;
 
-  // repeated .genomestore.Interval introns = 9;
+  // repeated .genomestore.Interval introns = 8;
   int introns_size() const;
   void clear_introns();
-  static const int kIntronsFieldNumber = 9;
+  static const int kIntronsFieldNumber = 8;
   ::genomestore::Interval* mutable_introns(int index);
   ::google::protobuf::RepeatedPtrField< ::genomestore::Interval >*
       mutable_introns();
@@ -395,41 +395,71 @@ class Gene : public ::google::protobuf::Message /* @@protoc_insertion_point(clas
   ::std::string* release_id();
   void set_allocated_id(::std::string* id);
 
-  // uint32 tx_start = 2;
-  void clear_tx_start();
-  static const int kTxStartFieldNumber = 2;
-  ::google::protobuf::uint32 tx_start() const;
-  void set_tx_start(::google::protobuf::uint32 value);
+  // string sym = 2;
+  void clear_sym();
+  static const int kSymFieldNumber = 2;
+  const ::std::string& sym() const;
+  void set_sym(const ::std::string& value);
+  #if LANG_CXX11
+  void set_sym(::std::string&& value);
+  #endif
+  void set_sym(const char* value);
+  void set_sym(const char* value, size_t size);
+  ::std::string* mutable_sym();
+  ::std::string* release_sym();
+  void set_allocated_sym(::std::string* sym);
 
-  // uint32 tx_end = 3;
-  void clear_tx_end();
-  static const int kTxEndFieldNumber = 3;
-  ::google::protobuf::uint32 tx_end() const;
-  void set_tx_end(::google::protobuf::uint32 value);
+  // string ref = 3;
+  void clear_ref();
+  static const int kRefFieldNumber = 3;
+  const ::std::string& ref() const;
+  void set_ref(const ::std::string& value);
+  #if LANG_CXX11
+  void set_ref(::std::string&& value);
+  #endif
+  void set_ref(const char* value);
+  void set_ref(const char* value, size_t size);
+  ::std::string* mutable_ref();
+  ::std::string* release_ref();
+  void set_allocated_ref(::std::string* ref);
 
-  // uint32 cds_start = 4;
-  void clear_cds_start();
-  static const int kCdsStartFieldNumber = 4;
-  ::google::protobuf::uint32 cds_start() const;
-  void set_cds_start(::google::protobuf::uint32 value);
+  // string chr = 4;
+  void clear_chr();
+  static const int kChrFieldNumber = 4;
+  const ::std::string& chr() const;
+  void set_chr(const ::std::string& value);
+  #if LANG_CXX11
+  void set_chr(::std::string&& value);
+  #endif
+  void set_chr(const char* value);
+  void set_chr(const char* value, size_t size);
+  ::std::string* mutable_chr();
+  ::std::string* release_chr();
+  void set_allocated_chr(::std::string* chr);
 
-  // uint32 cds_end = 5;
-  void clear_cds_end();
-  static const int kCdsEndFieldNumber = 5;
-  ::google::protobuf::uint32 cds_end() const;
-  void set_cds_end(::google::protobuf::uint32 value);
+  // .genomestore.Interval tx = 5;
+  bool has_tx() const;
+  void clear_tx();
+  static const int kTxFieldNumber = 5;
+  private:
+  const ::genomestore::Interval& _internal_tx() const;
+  public:
+  const ::genomestore::Interval& tx() const;
+  ::genomestore::Interval* release_tx();
+  ::genomestore::Interval* mutable_tx();
+  void set_allocated_tx(::genomestore::Interval* tx);
 
-  // uint32 idx = 6;
-  void clear_idx();
-  static const int kIdxFieldNumber = 6;
-  ::google::protobuf::uint32 idx() const;
-  void set_idx(::google::protobuf::uint32 value);
-
-  // bool strand = 7;
-  void clear_strand();
-  static const int kStrandFieldNumber = 7;
-  bool strand() const;
-  void set_strand(bool value);
+  // .genomestore.Interval cds = 6;
+  bool has_cds() const;
+  void clear_cds();
+  static const int kCdsFieldNumber = 6;
+  private:
+  const ::genomestore::Interval& _internal_cds() const;
+  public:
+  const ::genomestore::Interval& cds() const;
+  ::genomestore::Interval* release_cds();
+  ::genomestore::Interval* mutable_cds();
+  void set_allocated_cds(::genomestore::Interval* cds);
 
   // @@protoc_insertion_point(class_scope:genomestore.Gene)
  private:
@@ -438,12 +468,11 @@ class Gene : public ::google::protobuf::Message /* @@protoc_insertion_point(clas
   ::google::protobuf::RepeatedPtrField< ::genomestore::Interval > exons_;
   ::google::protobuf::RepeatedPtrField< ::genomestore::Interval > introns_;
   ::google::protobuf::internal::ArenaStringPtr id_;
-  ::google::protobuf::uint32 tx_start_;
-  ::google::protobuf::uint32 tx_end_;
-  ::google::protobuf::uint32 cds_start_;
-  ::google::protobuf::uint32 cds_end_;
-  ::google::protobuf::uint32 idx_;
-  bool strand_;
+  ::google::protobuf::internal::ArenaStringPtr sym_;
+  ::google::protobuf::internal::ArenaStringPtr ref_;
+  ::google::protobuf::internal::ArenaStringPtr chr_;
+  ::genomestore::Interval* tx_;
+  ::genomestore::Interval* cds_;
   mutable ::google::protobuf::internal::CachedSize _cached_size_;
   friend struct ::protobuf_genomestore_2eproto::TableStruct;
 };
@@ -760,91 +789,274 @@ inline void Gene::set_allocated_id(::std::string* id) {
   // @@protoc_insertion_point(field_set_allocated:genomestore.Gene.id)
 }
 
-// uint32 tx_start = 2;
-inline void Gene::clear_tx_start() {
-  tx_start_ = 0u;
+// string sym = 2;
+inline void Gene::clear_sym() {
+  sym_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
-inline ::google::protobuf::uint32 Gene::tx_start() const {
-  // @@protoc_insertion_point(field_get:genomestore.Gene.tx_start)
-  return tx_start_;
+inline const ::std::string& Gene::sym() const {
+  // @@protoc_insertion_point(field_get:genomestore.Gene.sym)
+  return sym_.GetNoArena();
 }
-inline void Gene::set_tx_start(::google::protobuf::uint32 value) {
+inline void Gene::set_sym(const ::std::string& value) {
   
-  tx_start_ = value;
-  // @@protoc_insertion_point(field_set:genomestore.Gene.tx_start)
+  sym_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
+  // @@protoc_insertion_point(field_set:genomestore.Gene.sym)
+}
+#if LANG_CXX11
+inline void Gene::set_sym(::std::string&& value) {
+  
+  sym_.SetNoArena(
+    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
+  // @@protoc_insertion_point(field_set_rvalue:genomestore.Gene.sym)
+}
+#endif
+inline void Gene::set_sym(const char* value) {
+  GOOGLE_DCHECK(value != NULL);
+  
+  sym_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  // @@protoc_insertion_point(field_set_char:genomestore.Gene.sym)
+}
+inline void Gene::set_sym(const char* value, size_t size) {
+  
+  sym_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+      ::std::string(reinterpret_cast<const char*>(value), size));
+  // @@protoc_insertion_point(field_set_pointer:genomestore.Gene.sym)
+}
+inline ::std::string* Gene::mutable_sym() {
+  
+  // @@protoc_insertion_point(field_mutable:genomestore.Gene.sym)
+  return sym_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline ::std::string* Gene::release_sym() {
+  // @@protoc_insertion_point(field_release:genomestore.Gene.sym)
+  
+  return sym_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline void Gene::set_allocated_sym(::std::string* sym) {
+  if (sym != NULL) {
+    
+  } else {
+    
+  }
+  sym_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), sym);
+  // @@protoc_insertion_point(field_set_allocated:genomestore.Gene.sym)
 }
 
-// uint32 tx_end = 3;
-inline void Gene::clear_tx_end() {
-  tx_end_ = 0u;
+// string ref = 3;
+inline void Gene::clear_ref() {
+  ref_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
-inline ::google::protobuf::uint32 Gene::tx_end() const {
-  // @@protoc_insertion_point(field_get:genomestore.Gene.tx_end)
-  return tx_end_;
+inline const ::std::string& Gene::ref() const {
+  // @@protoc_insertion_point(field_get:genomestore.Gene.ref)
+  return ref_.GetNoArena();
 }
-inline void Gene::set_tx_end(::google::protobuf::uint32 value) {
+inline void Gene::set_ref(const ::std::string& value) {
   
-  tx_end_ = value;
-  // @@protoc_insertion_point(field_set:genomestore.Gene.tx_end)
+  ref_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
+  // @@protoc_insertion_point(field_set:genomestore.Gene.ref)
+}
+#if LANG_CXX11
+inline void Gene::set_ref(::std::string&& value) {
+  
+  ref_.SetNoArena(
+    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
+  // @@protoc_insertion_point(field_set_rvalue:genomestore.Gene.ref)
+}
+#endif
+inline void Gene::set_ref(const char* value) {
+  GOOGLE_DCHECK(value != NULL);
+  
+  ref_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  // @@protoc_insertion_point(field_set_char:genomestore.Gene.ref)
+}
+inline void Gene::set_ref(const char* value, size_t size) {
+  
+  ref_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+      ::std::string(reinterpret_cast<const char*>(value), size));
+  // @@protoc_insertion_point(field_set_pointer:genomestore.Gene.ref)
+}
+inline ::std::string* Gene::mutable_ref() {
+  
+  // @@protoc_insertion_point(field_mutable:genomestore.Gene.ref)
+  return ref_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline ::std::string* Gene::release_ref() {
+  // @@protoc_insertion_point(field_release:genomestore.Gene.ref)
+  
+  return ref_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline void Gene::set_allocated_ref(::std::string* ref) {
+  if (ref != NULL) {
+    
+  } else {
+    
+  }
+  ref_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ref);
+  // @@protoc_insertion_point(field_set_allocated:genomestore.Gene.ref)
 }
 
-// uint32 cds_start = 4;
-inline void Gene::clear_cds_start() {
-  cds_start_ = 0u;
+// string chr = 4;
+inline void Gene::clear_chr() {
+  chr_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
-inline ::google::protobuf::uint32 Gene::cds_start() const {
-  // @@protoc_insertion_point(field_get:genomestore.Gene.cds_start)
-  return cds_start_;
+inline const ::std::string& Gene::chr() const {
+  // @@protoc_insertion_point(field_get:genomestore.Gene.chr)
+  return chr_.GetNoArena();
 }
-inline void Gene::set_cds_start(::google::protobuf::uint32 value) {
+inline void Gene::set_chr(const ::std::string& value) {
   
-  cds_start_ = value;
-  // @@protoc_insertion_point(field_set:genomestore.Gene.cds_start)
+  chr_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
+  // @@protoc_insertion_point(field_set:genomestore.Gene.chr)
+}
+#if LANG_CXX11
+inline void Gene::set_chr(::std::string&& value) {
+  
+  chr_.SetNoArena(
+    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
+  // @@protoc_insertion_point(field_set_rvalue:genomestore.Gene.chr)
+}
+#endif
+inline void Gene::set_chr(const char* value) {
+  GOOGLE_DCHECK(value != NULL);
+  
+  chr_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  // @@protoc_insertion_point(field_set_char:genomestore.Gene.chr)
+}
+inline void Gene::set_chr(const char* value, size_t size) {
+  
+  chr_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+      ::std::string(reinterpret_cast<const char*>(value), size));
+  // @@protoc_insertion_point(field_set_pointer:genomestore.Gene.chr)
+}
+inline ::std::string* Gene::mutable_chr() {
+  
+  // @@protoc_insertion_point(field_mutable:genomestore.Gene.chr)
+  return chr_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline ::std::string* Gene::release_chr() {
+  // @@protoc_insertion_point(field_release:genomestore.Gene.chr)
+  
+  return chr_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline void Gene::set_allocated_chr(::std::string* chr) {
+  if (chr != NULL) {
+    
+  } else {
+    
+  }
+  chr_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), chr);
+  // @@protoc_insertion_point(field_set_allocated:genomestore.Gene.chr)
 }
 
-// uint32 cds_end = 5;
-inline void Gene::clear_cds_end() {
-  cds_end_ = 0u;
+// .genomestore.Interval tx = 5;
+inline bool Gene::has_tx() const {
+  return this != internal_default_instance() && tx_ != NULL;
 }
-inline ::google::protobuf::uint32 Gene::cds_end() const {
-  // @@protoc_insertion_point(field_get:genomestore.Gene.cds_end)
-  return cds_end_;
+inline void Gene::clear_tx() {
+  if (GetArenaNoVirtual() == NULL && tx_ != NULL) {
+    delete tx_;
+  }
+  tx_ = NULL;
 }
-inline void Gene::set_cds_end(::google::protobuf::uint32 value) {
+inline const ::genomestore::Interval& Gene::_internal_tx() const {
+  return *tx_;
+}
+inline const ::genomestore::Interval& Gene::tx() const {
+  const ::genomestore::Interval* p = tx_;
+  // @@protoc_insertion_point(field_get:genomestore.Gene.tx)
+  return p != NULL ? *p : *reinterpret_cast<const ::genomestore::Interval*>(
+      &::genomestore::_Interval_default_instance_);
+}
+inline ::genomestore::Interval* Gene::release_tx() {
+  // @@protoc_insertion_point(field_release:genomestore.Gene.tx)
   
-  cds_end_ = value;
-  // @@protoc_insertion_point(field_set:genomestore.Gene.cds_end)
+  ::genomestore::Interval* temp = tx_;
+  tx_ = NULL;
+  return temp;
+}
+inline ::genomestore::Interval* Gene::mutable_tx() {
+  
+  if (tx_ == NULL) {
+    auto* p = CreateMaybeMessage<::genomestore::Interval>(GetArenaNoVirtual());
+    tx_ = p;
+  }
+  // @@protoc_insertion_point(field_mutable:genomestore.Gene.tx)
+  return tx_;
+}
+inline void Gene::set_allocated_tx(::genomestore::Interval* tx) {
+  ::google::protobuf::Arena* message_arena = GetArenaNoVirtual();
+  if (message_arena == NULL) {
+    delete tx_;
+  }
+  if (tx) {
+    ::google::protobuf::Arena* submessage_arena = NULL;
+    if (message_arena != submessage_arena) {
+      tx = ::google::protobuf::internal::GetOwnedMessage(
+          message_arena, tx, submessage_arena);
+    }
+    
+  } else {
+    
+  }
+  tx_ = tx;
+  // @@protoc_insertion_point(field_set_allocated:genomestore.Gene.tx)
 }
 
-// uint32 idx = 6;
-inline void Gene::clear_idx() {
-  idx_ = 0u;
+// .genomestore.Interval cds = 6;
+inline bool Gene::has_cds() const {
+  return this != internal_default_instance() && cds_ != NULL;
 }
-inline ::google::protobuf::uint32 Gene::idx() const {
-  // @@protoc_insertion_point(field_get:genomestore.Gene.idx)
-  return idx_;
+inline void Gene::clear_cds() {
+  if (GetArenaNoVirtual() == NULL && cds_ != NULL) {
+    delete cds_;
+  }
+  cds_ = NULL;
 }
-inline void Gene::set_idx(::google::protobuf::uint32 value) {
+inline const ::genomestore::Interval& Gene::_internal_cds() const {
+  return *cds_;
+}
+inline const ::genomestore::Interval& Gene::cds() const {
+  const ::genomestore::Interval* p = cds_;
+  // @@protoc_insertion_point(field_get:genomestore.Gene.cds)
+  return p != NULL ? *p : *reinterpret_cast<const ::genomestore::Interval*>(
+      &::genomestore::_Interval_default_instance_);
+}
+inline ::genomestore::Interval* Gene::release_cds() {
+  // @@protoc_insertion_point(field_release:genomestore.Gene.cds)
   
-  idx_ = value;
-  // @@protoc_insertion_point(field_set:genomestore.Gene.idx)
+  ::genomestore::Interval* temp = cds_;
+  cds_ = NULL;
+  return temp;
+}
+inline ::genomestore::Interval* Gene::mutable_cds() {
+  
+  if (cds_ == NULL) {
+    auto* p = CreateMaybeMessage<::genomestore::Interval>(GetArenaNoVirtual());
+    cds_ = p;
+  }
+  // @@protoc_insertion_point(field_mutable:genomestore.Gene.cds)
+  return cds_;
+}
+inline void Gene::set_allocated_cds(::genomestore::Interval* cds) {
+  ::google::protobuf::Arena* message_arena = GetArenaNoVirtual();
+  if (message_arena == NULL) {
+    delete cds_;
+  }
+  if (cds) {
+    ::google::protobuf::Arena* submessage_arena = NULL;
+    if (message_arena != submessage_arena) {
+      cds = ::google::protobuf::internal::GetOwnedMessage(
+          message_arena, cds, submessage_arena);
+    }
+    
+  } else {
+    
+  }
+  cds_ = cds;
+  // @@protoc_insertion_point(field_set_allocated:genomestore.Gene.cds)
 }
 
-// bool strand = 7;
-inline void Gene::clear_strand() {
-  strand_ = false;
-}
-inline bool Gene::strand() const {
-  // @@protoc_insertion_point(field_get:genomestore.Gene.strand)
-  return strand_;
-}
-inline void Gene::set_strand(bool value) {
-  
-  strand_ = value;
-  // @@protoc_insertion_point(field_set:genomestore.Gene.strand)
-}
-
-// repeated .genomestore.Interval exons = 8;
+// repeated .genomestore.Interval exons = 7;
 inline int Gene::exons_size() const {
   return exons_.size();
 }
@@ -874,7 +1086,7 @@ Gene::exons() const {
   return exons_;
 }
 
-// repeated .genomestore.Interval introns = 9;
+// repeated .genomestore.Interval introns = 8;
 inline int Gene::introns_size() const {
   return introns_.size();
 }

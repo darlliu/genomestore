@@ -24,13 +24,11 @@ message Interval {
 
 message Gene {
     string id = 1;
-    uint32 tx_start = 2;
-    uint32 tx_end = 3;
-    uint32 cds_start = 4;
-    uint32 cds_end = 5;
-    uint32 idx = 6;
-    bool strand = 7;
-    repeated Interval exons = 8;
-    repeated Interval introns = 9;
+    string sym = 2;
+    string ref = 3;
+    string chr = 4;
+    Interval tx = 5;
+    Interval cds = 6;
+    repeated Interval exons = 7;
+    repeated Interval introns = 8;
 }
-

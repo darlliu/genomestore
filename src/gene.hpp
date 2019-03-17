@@ -11,80 +11,21 @@
  * 3, initialize a multiset from gene ids
  **/
 
-struct inv {
-  inv() { _inv.set_len(-1); };
-  inv(uint32_t start, uint32_t len, bool strand) {
-    _inv.set_begin(start);
-    _inv.set_len(len);
-    _inv.set_strand(strand);
-  }
-  inv(const std::string &ref, const std::string &chr, uint32_t start,
-      uint32_t len, bool strand) {
-    inv(start, len, strand);
-    _inv.set_ref(ref);
-    _inv.set_chr(chr);
-  };
-  const uint32_t &start() { return _inv.get_start(); };
-  const uint32_t &len() { return _inv.get_len(); };
-  const uint32_t &end() { return _inv.get_start() + _inv.get_len(); };
-  const bool &strand() { return _inv.get_strand(); };
-  const std::string &ref() { return _inv.get_ref(); };
-  const std::string &chr() { return _inv.get_chr(); };
-  const std::string &seqs() { return _inv.get_seqs(); };
-  bool operator==(const inv &another) {
-    return ((ref() == another.ref()) && (chr() == another.chr()) &&
-            (start() == another.start()) && (len() == another.len()) &&
-            (strand() == another.strand()));
-  };
-  bool operator!=(const inv &another) { return !((*this) == (another)); };
-  std::string info() {
-    char tmp[256];
-    auto fm = sprintf(tmp, "[%s, %s]: (%d, %d) @ %s @ {strand: %d}",
-                      ref().c_str(), chr().c_str(), start(), end(),
-                      seqs().substr(50).c_str(), (int)strand());
-    return std::string(tmp);
-  };
-  bool operator<(const inv &another) {
-    if (chr() != another.chr())
-      return chr() < another.chr();
-    if (another.start() > end())
-      return true;
-    if (another.end() < start())
-      return false;
-    return (start() < another.start());
-  }
-  Interval _inv;
-};
-
-// bool combine_intervals(interval &left, interval &right) {
-//   if (left.ref().find(right.ref()) == std::string::npos)
-//     return false;
-//   if (left.chr().find(right.chr()) == std::string::npos)
-//     return false;
-//   if (left.start > right.start)
-//     left.start = right.start;
-//   if (left.end < right.end)
-//     left.end = right.end;
-//   return true;
-// }
-
 class gene {
 private:
-  seqdb *sdb = nullptr;
+  Gene _gene;
+  std::multiset<interval, [](const Interval &left,
+                             const Interval &right) { return left < right; }>
+      introns, exons;
 
 public:
-  std::string sym, id = "";
-  unsigned cds_start, cds_end, tx_start, tx_end, idx, chr_;
-  bool strand;
-  std::multiset<interval, intervalCmp> exons;
-  interval inv() { return interval{sdb, chr_, tx_start, tx_end, idx, strand}; };
-  interval cds() {
-    return interval{sdb, chr_, cds_start, cds_end, idx, strand};
-  };
+  gene(){};
+  interval tx() { return _gene.tx(); };
+  interval cds() { return _gene.cds(); };
   std::string chr() const { return sdb->chrs[chr_]; };
   std::string ref() const { return sdb->name; };
   unsigned long sz() const { return sdb->sizes[chr()]; };
-  std::string info() { return inv().info(); };
+  std::string info() { return tx().info(); };
   std::vector<interval> get_exons() {
     std::vector<interval> out;
     for (auto &it : exons) {

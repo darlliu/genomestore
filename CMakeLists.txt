@@ -23,7 +23,6 @@ ENDIF()
 
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "../bin")
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY "../lib")
-
 #configure_file("${SOURCE_DIR}/base.hpp")
 
 INCLUDE_DIRECTORIES(
@@ -36,7 +35,10 @@ INCLUDE_DIRECTORIES(
 LINK_DIRECTORIES(
     )
 
-FIND_PACKAGE(PythonLibs 3.7)
+FIND_PACKAGE(PythonLibs 3.7 REQUIRED)
+FIND_PACKAGE(Protobuf REQUIRED)
+include_directories(${Protobuf_INCLUDE_DIRS})
+include_directories(${CMAKE_CURRENT_BINARY_DIR})
 
 message("Configuring core C++ binaries")
 # file (GLOB MOODS_SRC 
@@ -48,11 +50,15 @@ message("Configuring core C++ binaries")
 IF(WIN32)
     add_library(llmdb ${LMDB_DIR}/midl.c ${LMDB_DIR}/midl.h ${LMDB_DIR}/mdb.c)
     add_library(lindexer ${SOURCE_DIR}/indexer.cpp ${SOURCE_DIR}/base.cpp ${SOURCE_DIR}/indexer.hpp ${SOURCE_DIR}/base.hpp)
+    add_library(lgenes ${SOURCE_DIR}/interval.cpp ${SOURCE_DIR}/interval.hpp ${SOURCE_DIR}/genomestore.pb.h ${SOURCE_DIR}/genomestore.pb.cc ${PROTO_SRCS} ${PROTO_HDRS}) 
     target_link_libraries(lindexer llmdb)
+    target_link_libraries(lgenes ${Protobuf_LIBRARIES})
 ELSE()
     add_library(lmdb SHARED ${LMDB_DIR}/midl.c ${LMDB_DIR}/midl.h ${LMDB_DIR}/mdb.c)
     add_library(indexer SHARED ${SOURCE_DIR}/indexer.cpp ${SOURCE_DIR}/base.cpp ${SOURCE_DIR}/indexer.hpp ${SOURCE_DIR}/base.hpp)
+    add_library(genes SHARED ${SOURCE_DIR}/interval.cpp ${SOURCE_DIR}/genomestore.pb.cc ${PROTO_SRCS} ${PROTO_HDRS}) 
     target_link_libraries(indexer lmdb stdc++fs)
+    target_link_libraries(genes ${Protobuf_LIBRARIES})
 ENDIF()
 if(BUILD_TESTING)
   IF(WIN32)
