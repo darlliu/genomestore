@@ -27,10 +27,11 @@ const bool inv::operator<(const inv &another) {
 }
 
 inv inv::operator+(const inv &right) {
+	auto _ref = ref(), _chr = chr();
   // combine intervals, while taking the strandity of the current interval
   if (ref().find(right.ref()) == std::string::npos ||
       chr().find(right.chr()) == std::string::npos) {
-    return *this;
+	  return inv{ std::move(_ref), std::move(_chr), start(), end(), strand()};
   }
   uint32_t _start, _end;
   if (start() > right.start())
@@ -41,15 +42,17 @@ inv inv::operator+(const inv &right) {
     _end = right.end();
   else
     _end = end();
-  return inv{ref(), chr(), _start, _end, strand()};
+
+  return inv{std::move(_ref), std::move(_chr), _start, _end, strand()};
 }
 
 inv inv::operator-(const inv &right) {
-  // subtract interval, only subtracts from the left
-  if (ref().find(right.ref()) == std::string::npos ||
-      chr().find(right.chr()) == std::string::npos) {
-    return *this;
-  }
+	auto _ref = ref(), _chr = chr();
+	// combine intervals, while taking the strandity of the current interval
+	if (ref().find(right.ref()) == std::string::npos ||
+		chr().find(right.chr()) == std::string::npos) {
+		return inv{ std::move(_ref), std::move(_chr), start(), end(), strand() };
+	}
   uint32_t _start, _end;
   if (start() > right.start())
     _start = start();
@@ -59,6 +62,6 @@ inv inv::operator-(const inv &right) {
     _end = end();
   else
     _end = right.end();
-  return inv{ref(), chr(), _start, _end, strand()};
+  return inv{std::move(_ref), std::move(_chr), _start, _end, strand()};
 }
 #endif
