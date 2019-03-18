@@ -11,9 +11,7 @@
  **/
 
 struct inv {
-  inv() {
-	  _inv->set_len(-1); 
-  };
+  inv() { _inv->set_len(-1); };
   inv(uint32_t start, uint32_t len, bool strand) {
     _inv->set_start(start);
     _inv->set_len(len);
@@ -23,7 +21,7 @@ struct inv {
       bool strand)
       : inv(start, end - start, strand) {
     assert(end >= start);
-	auto _ref = ref, _chr = chr;
+    auto _ref = ref, _chr = chr;
     _inv->set_ref(std::move(_ref));
     _inv->set_chr(std::move(_chr));
   };
@@ -50,7 +48,8 @@ struct inv {
   inv operator/(inv &another) { return (another - (*this)); };
 
 private:
-  std::unique_ptr<genomestore::Interval> _inv = std::make_unique<genomestore::Interval>();
+  std::unique_ptr<genomestore::Interval> _inv =
+      std::make_unique<genomestore::Interval>();
 };
 
 #endif

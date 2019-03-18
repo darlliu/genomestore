@@ -20,14 +20,14 @@ TEST_CASE("TESTING INTERVAL") {
     auto k = inv();
     REQUIRE(k.null());
     REQUIRE(k.empty() == false);
-    auto i = inv (1000000, 50, true);
-	auto j = inv ( 1000000, 50, true) ;
-    REQUIRE( (i.len() == 50));
-    REQUIRE( (i == j) == true);
-    //inv j = inv{"mm10", "chr1", 1000050, 1000100, true};
-    //REQUIRE(i != j);
+    auto i = inv(1000000, 50, true);
+    auto j = inv(1000000, 50, true);
+    REQUIRE((i.len() == 50));
+    REQUIRE((i == j) == true);
+    // inv j = inv{"mm10", "chr1", 1000050, 1000100, true};
+    // REQUIRE(i != j);
   }
-  //SECTION("TESTING INTERVAL OPEARTIONS") {
+  // SECTION("TESTING INTERVAL OPEARTIONS") {
   //  inv i = inv{"mm10", "chr1", 1000000, 1000050, true};
   //  inv j = inv{"mm10", "chr1", 1000050, 1000100, true};
   //  inv k = inv{"mm10", "chr1", 1000025, 1000050, true};
