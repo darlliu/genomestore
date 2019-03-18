@@ -10,9 +10,15 @@ const bool inv::operator==(const inv &another) {
 
 const std::string inv::info() const {
   char tmp[256];
+#if WIN32
   auto fm = sprintf_s(tmp, "[%s, %s]: (%d, %d) @ %s @ {strand: %d}",
                       ref().c_str(), chr().c_str(), start(), end(),
                       seqs().substr(50).c_str(), (int)strand());
+#else
+  auto fm = sprintf(tmp, "[%s, %s]: (%d, %d) @ %s @ {strand: %d}",
+                      ref().c_str(), chr().c_str(), start(), end(),
+                      seqs().substr(50).c_str(), (int)strand());
+#endif
   return std::string(tmp);
 }
 

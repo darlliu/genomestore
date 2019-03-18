@@ -16,8 +16,8 @@
 #include <string>
 #include <vector>
 
-#if defined(WIN32) || defined(_WIN32) ||                                       \
-    defined(__WIN32) && !defined(__CYGWIN__)
+#define ISWINDOWS defined(WIN32) || defined(_WIN32) || defined(__WIN32) && !defined(__CYGWIN__)
+#if ISWINDOWS
 #include <experimental/filesystem>
 #else
 #include <experimental/filesystem>
@@ -78,7 +78,7 @@ public:
              bool append, int &cnt);
   std::string getdb(ldb &dbenv, const std::string &key);
   void dbinit() { dbinit(dbenv, dbpath + "_ldb"); }; // default to one db
-  const ldb getldb() const { return dbenv; };
+  const ldb &getldb() const { return dbenv; };
   void setdb(const std::string &key, const std::string &val,
              bool append = false) {
     setdb(dbenv, key, val, append, cnt);

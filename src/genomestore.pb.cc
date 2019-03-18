@@ -6,36 +6,28 @@
 #include <algorithm>
 
 #include <google/protobuf/stubs/common.h>
-#include <google/protobuf/stubs/port.h>
 #include <google/protobuf/io/coded_stream.h>
+#include <google/protobuf/extension_set.h>
 #include <google/protobuf/wire_format_lite_inl.h>
 #include <google/protobuf/descriptor.h>
 #include <google/protobuf/generated_message_reflection.h>
 #include <google/protobuf/reflection_ops.h>
 #include <google/protobuf/wire_format.h>
-// This is a temporary google only hack
-#ifdef GOOGLE_PROTOBUF_ENFORCE_UNIQUENESS
-#include "third_party/protobuf/version.h"
-#endif
 // @@protoc_insertion_point(includes)
+#include <google/protobuf/port_def.inc>
 
-namespace protobuf_genomestore_2eproto {
-extern PROTOBUF_INTERNAL_EXPORT_protobuf_genomestore_2eproto ::google::protobuf::internal::SCCInfo<0> scc_info_Interval;
-}  // namespace protobuf_genomestore_2eproto
+extern PROTOBUF_INTERNAL_EXPORT_genomestore_2eproto ::google::protobuf::internal::SCCInfo<0> scc_info_Interval_genomestore_2eproto;
 namespace genomestore {
 class IntervalDefaultTypeInternal {
  public:
-  ::google::protobuf::internal::ExplicitlyConstructed<Interval>
-      _instance;
+  ::google::protobuf::internal::ExplicitlyConstructed<Interval> _instance;
 } _Interval_default_instance_;
 class GeneDefaultTypeInternal {
  public:
-  ::google::protobuf::internal::ExplicitlyConstructed<Gene>
-      _instance;
+  ::google::protobuf::internal::ExplicitlyConstructed<Gene> _instance;
 } _Gene_default_instance_;
 }  // namespace genomestore
-namespace protobuf_genomestore_2eproto {
-static void InitDefaultsInterval() {
+static void InitDefaultsInterval_genomestore_2eproto() {
   GOOGLE_PROTOBUF_VERIFY_VERSION;
 
   {
@@ -46,10 +38,10 @@ static void InitDefaultsInterval() {
   ::genomestore::Interval::InitAsDefaultInstance();
 }
 
-::google::protobuf::internal::SCCInfo<0> scc_info_Interval =
-    {{ATOMIC_VAR_INIT(::google::protobuf::internal::SCCInfoBase::kUninitialized), 0, InitDefaultsInterval}, {}};
+::google::protobuf::internal::SCCInfo<0> scc_info_Interval_genomestore_2eproto =
+    {{ATOMIC_VAR_INIT(::google::protobuf::internal::SCCInfoBase::kUninitialized), 0, InitDefaultsInterval_genomestore_2eproto}, {}};
 
-static void InitDefaultsGene() {
+static void InitDefaultsGene_genomestore_2eproto() {
   GOOGLE_PROTOBUF_VERIFY_VERSION;
 
   {
@@ -60,47 +52,48 @@ static void InitDefaultsGene() {
   ::genomestore::Gene::InitAsDefaultInstance();
 }
 
-::google::protobuf::internal::SCCInfo<1> scc_info_Gene =
-    {{ATOMIC_VAR_INIT(::google::protobuf::internal::SCCInfoBase::kUninitialized), 1, InitDefaultsGene}, {
-      &protobuf_genomestore_2eproto::scc_info_Interval.base,}};
+::google::protobuf::internal::SCCInfo<1> scc_info_Gene_genomestore_2eproto =
+    {{ATOMIC_VAR_INIT(::google::protobuf::internal::SCCInfoBase::kUninitialized), 1, InitDefaultsGene_genomestore_2eproto}, {
+      &scc_info_Interval_genomestore_2eproto.base,}};
 
-void InitDefaults() {
-  ::google::protobuf::internal::InitSCC(&scc_info_Interval.base);
-  ::google::protobuf::internal::InitSCC(&scc_info_Gene.base);
+void InitDefaults_genomestore_2eproto() {
+  ::google::protobuf::internal::InitSCC(&scc_info_Interval_genomestore_2eproto.base);
+  ::google::protobuf::internal::InitSCC(&scc_info_Gene_genomestore_2eproto.base);
 }
 
-::google::protobuf::Metadata file_level_metadata[2];
-const ::google::protobuf::EnumDescriptor* file_level_enum_descriptors[1];
+::google::protobuf::Metadata file_level_metadata_genomestore_2eproto[2];
+const ::google::protobuf::EnumDescriptor* file_level_enum_descriptors_genomestore_2eproto[1];
+constexpr ::google::protobuf::ServiceDescriptor const** file_level_service_descriptors_genomestore_2eproto = nullptr;
 
-const ::google::protobuf::uint32 TableStruct::offsets[] GOOGLE_PROTOBUF_ATTRIBUTE_SECTION_VARIABLE(protodesc_cold) = {
+const ::google::protobuf::uint32 TableStruct_genomestore_2eproto::offsets[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) = {
   ~0u,  // no _has_bits_
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::genomestore::Interval, _internal_metadata_),
+  PROTOBUF_FIELD_OFFSET(::genomestore::Interval, _internal_metadata_),
   ~0u,  // no _extensions_
   ~0u,  // no _oneof_case_
   ~0u,  // no _weak_field_map_
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::genomestore::Interval, ref_),
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::genomestore::Interval, chr_),
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::genomestore::Interval, start_),
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::genomestore::Interval, len_),
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::genomestore::Interval, strand_),
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::genomestore::Interval, seq_),
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::genomestore::Interval, seqs_),
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::genomestore::Interval, score_),
+  PROTOBUF_FIELD_OFFSET(::genomestore::Interval, ref_),
+  PROTOBUF_FIELD_OFFSET(::genomestore::Interval, chr_),
+  PROTOBUF_FIELD_OFFSET(::genomestore::Interval, start_),
+  PROTOBUF_FIELD_OFFSET(::genomestore::Interval, len_),
+  PROTOBUF_FIELD_OFFSET(::genomestore::Interval, strand_),
+  PROTOBUF_FIELD_OFFSET(::genomestore::Interval, seq_),
+  PROTOBUF_FIELD_OFFSET(::genomestore::Interval, seqs_),
+  PROTOBUF_FIELD_OFFSET(::genomestore::Interval, score_),
   ~0u,  // no _has_bits_
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::genomestore::Gene, _internal_metadata_),
+  PROTOBUF_FIELD_OFFSET(::genomestore::Gene, _internal_metadata_),
   ~0u,  // no _extensions_
   ~0u,  // no _oneof_case_
   ~0u,  // no _weak_field_map_
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::genomestore::Gene, id_),
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::genomestore::Gene, sym_),
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::genomestore::Gene, ref_),
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::genomestore::Gene, chr_),
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::genomestore::Gene, tx_),
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::genomestore::Gene, cds_),
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::genomestore::Gene, exons_),
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::genomestore::Gene, introns_),
+  PROTOBUF_FIELD_OFFSET(::genomestore::Gene, id_),
+  PROTOBUF_FIELD_OFFSET(::genomestore::Gene, sym_),
+  PROTOBUF_FIELD_OFFSET(::genomestore::Gene, ref_),
+  PROTOBUF_FIELD_OFFSET(::genomestore::Gene, chr_),
+  PROTOBUF_FIELD_OFFSET(::genomestore::Gene, tx_),
+  PROTOBUF_FIELD_OFFSET(::genomestore::Gene, cds_),
+  PROTOBUF_FIELD_OFFSET(::genomestore::Gene, exons_),
+  PROTOBUF_FIELD_OFFSET(::genomestore::Gene, introns_),
 };
-static const ::google::protobuf::internal::MigrationSchema schemas[] GOOGLE_PROTOBUF_ATTRIBUTE_SECTION_VARIABLE(protodesc_cold) = {
+static const ::google::protobuf::internal::MigrationSchema schemas[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) = {
   { 0, -1, sizeof(::genomestore::Interval)},
   { 13, -1, sizeof(::genomestore::Gene)},
 };
@@ -110,61 +103,45 @@ static ::google::protobuf::Message const * const file_default_instances[] = {
   reinterpret_cast<const ::google::protobuf::Message*>(&::genomestore::_Gene_default_instance_),
 };
 
-void protobuf_AssignDescriptors() {
-  AddDescriptors();
-  AssignDescriptors(
-      "genomestore.proto", schemas, file_default_instances, TableStruct::offsets,
-      file_level_metadata, file_level_enum_descriptors, NULL);
-}
+::google::protobuf::internal::AssignDescriptorsTable assign_descriptors_table_genomestore_2eproto = {
+  {}, AddDescriptors_genomestore_2eproto, "genomestore.proto", schemas,
+  file_default_instances, TableStruct_genomestore_2eproto::offsets,
+  file_level_metadata_genomestore_2eproto, 2, file_level_enum_descriptors_genomestore_2eproto, file_level_service_descriptors_genomestore_2eproto,
+};
 
-void protobuf_AssignDescriptorsOnce() {
-  static ::google::protobuf::internal::once_flag once;
-  ::google::protobuf::internal::call_once(once, protobuf_AssignDescriptors);
-}
+const char descriptor_table_protodef_genomestore_2eproto[] =
+  "\n\021genomestore.proto\022\013genomestore\"\215\001\n\010Int"
+  "erval\022\013\n\003ref\030\001 \001(\t\022\013\n\003chr\030\002 \001(\t\022\r\n\005start"
+  "\030\003 \001(\r\022\013\n\003len\030\004 \001(\r\022\016\n\006strand\030\005 \001(\010\022\036\n\003s"
+  "eq\030\006 \003(\0162\021.genomestore.Base\022\014\n\004seqs\030\007 \001("
+  "\t\022\r\n\005score\030\010 \001(\002\"\316\001\n\004Gene\022\n\n\002id\030\001 \001(\t\022\013\n"
+  "\003sym\030\002 \001(\t\022\013\n\003ref\030\003 \001(\t\022\013\n\003chr\030\004 \001(\t\022!\n\002"
+  "tx\030\005 \001(\0132\025.genomestore.Interval\022\"\n\003cds\030\006"
+  " \001(\0132\025.genomestore.Interval\022$\n\005exons\030\007 \003"
+  "(\0132\025.genomestore.Interval\022&\n\007introns\030\010 \003"
+  "(\0132\025.genomestore.Interval*0\n\004Base\022\005\n\001a\020\000"
+  "\022\005\n\001c\020\001\022\005\n\001g\020\002\022\005\n\001t\020\003\022\005\n\001u\020\004\022\005\n\001n\020\005b\006pro"
+  "to3"
+  ;
+::google::protobuf::internal::DescriptorTable descriptor_table_genomestore_2eproto = {
+  false, InitDefaults_genomestore_2eproto, 
+  descriptor_table_protodef_genomestore_2eproto,
+  "genomestore.proto", &assign_descriptors_table_genomestore_2eproto, 443,
+};
 
-void protobuf_RegisterTypes(const ::std::string&) GOOGLE_PROTOBUF_ATTRIBUTE_COLD;
-void protobuf_RegisterTypes(const ::std::string&) {
-  protobuf_AssignDescriptorsOnce();
-  ::google::protobuf::internal::RegisterAllTypes(file_level_metadata, 2);
-}
-
-void AddDescriptorsImpl() {
-  InitDefaults();
-  static const char descriptor[] GOOGLE_PROTOBUF_ATTRIBUTE_SECTION_VARIABLE(protodesc_cold) = {
-      "\n\021genomestore.proto\022\013genomestore\"\215\001\n\010Int"
-      "erval\022\013\n\003ref\030\001 \001(\t\022\013\n\003chr\030\002 \001(\t\022\r\n\005start"
-      "\030\003 \001(\r\022\013\n\003len\030\004 \001(\r\022\016\n\006strand\030\005 \001(\010\022\036\n\003s"
-      "eq\030\006 \003(\0162\021.genomestore.Base\022\014\n\004seqs\030\007 \001("
-      "\t\022\r\n\005score\030\010 \001(\002\"\316\001\n\004Gene\022\n\n\002id\030\001 \001(\t\022\013\n"
-      "\003sym\030\002 \001(\t\022\013\n\003ref\030\003 \001(\t\022\013\n\003chr\030\004 \001(\t\022!\n\002"
-      "tx\030\005 \001(\0132\025.genomestore.Interval\022\"\n\003cds\030\006"
-      " \001(\0132\025.genomestore.Interval\022$\n\005exons\030\007 \003"
-      "(\0132\025.genomestore.Interval\022&\n\007introns\030\010 \003"
-      "(\0132\025.genomestore.Interval*0\n\004Base\022\005\n\001a\020\000"
-      "\022\005\n\001c\020\001\022\005\n\001g\020\002\022\005\n\001t\020\003\022\005\n\001u\020\004\022\005\n\001n\020\005b\006pro"
-      "to3"
+void AddDescriptors_genomestore_2eproto() {
+  static constexpr ::google::protobuf::internal::InitFunc deps[1] =
+  {
   };
-  ::google::protobuf::DescriptorPool::InternalAddGeneratedFile(
-      descriptor, 443);
-  ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
-    "genomestore.proto", &protobuf_RegisterTypes);
+ ::google::protobuf::internal::AddDescriptors(&descriptor_table_genomestore_2eproto, deps, 0);
 }
 
-void AddDescriptors() {
-  static ::google::protobuf::internal::once_flag once;
-  ::google::protobuf::internal::call_once(once, AddDescriptorsImpl);
-}
-// Force AddDescriptors() to be called at dynamic initialization time.
-struct StaticDescriptorInitializer {
-  StaticDescriptorInitializer() {
-    AddDescriptors();
-  }
-} static_descriptor_initializer;
-}  // namespace protobuf_genomestore_2eproto
+// Force running AddDescriptors() at dynamic initialization time.
+static bool dynamic_init_dummy_genomestore_2eproto = []() { AddDescriptors_genomestore_2eproto(); return true; }();
 namespace genomestore {
 const ::google::protobuf::EnumDescriptor* Base_descriptor() {
-  protobuf_genomestore_2eproto::protobuf_AssignDescriptorsOnce();
-  return protobuf_genomestore_2eproto::file_level_enum_descriptors[0];
+  ::google::protobuf::internal::AssignDescriptors(&assign_descriptors_table_genomestore_2eproto);
+  return file_level_enum_descriptors_genomestore_2eproto[0];
 }
 bool Base_IsValid(int value) {
   switch (value) {
@@ -185,6 +162,10 @@ bool Base_IsValid(int value) {
 
 void Interval::InitAsDefaultInstance() {
 }
+class Interval::HasBitSetters {
+ public:
+};
+
 #if !defined(_MSC_VER) || _MSC_VER >= 1900
 const int Interval::kRefFieldNumber;
 const int Interval::kChrFieldNumber;
@@ -197,15 +178,13 @@ const int Interval::kScoreFieldNumber;
 #endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
 
 Interval::Interval()
-  : ::google::protobuf::Message(), _internal_metadata_(NULL) {
-  ::google::protobuf::internal::InitSCC(
-      &protobuf_genomestore_2eproto::scc_info_Interval.base);
+  : ::google::protobuf::Message(), _internal_metadata_(nullptr) {
   SharedCtor();
   // @@protoc_insertion_point(constructor:genomestore.Interval)
 }
 Interval::Interval(const Interval& from)
   : ::google::protobuf::Message(),
-      _internal_metadata_(NULL),
+      _internal_metadata_(nullptr),
       seq_(from.seq_) {
   _internal_metadata_.MergeFrom(from._internal_metadata_);
   ref_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
@@ -227,6 +206,8 @@ Interval::Interval(const Interval& from)
 }
 
 void Interval::SharedCtor() {
+  ::google::protobuf::internal::InitSCC(
+      &scc_info_Interval_genomestore_2eproto.base);
   ref_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   chr_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   seqs_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
@@ -249,13 +230,8 @@ void Interval::SharedDtor() {
 void Interval::SetCachedSize(int size) const {
   _cached_size_.Set(size);
 }
-const ::google::protobuf::Descriptor* Interval::descriptor() {
-  ::protobuf_genomestore_2eproto::protobuf_AssignDescriptorsOnce();
-  return ::protobuf_genomestore_2eproto::file_level_metadata[kIndexInFileMessages].descriptor;
-}
-
 const Interval& Interval::default_instance() {
-  ::google::protobuf::internal::InitSCC(&protobuf_genomestore_2eproto::scc_info_Interval.base);
+  ::google::protobuf::internal::InitSCC(&::scc_info_Interval_genomestore_2eproto.base);
   return *internal_default_instance();
 }
 
@@ -276,9 +252,143 @@ void Interval::Clear() {
   _internal_metadata_.Clear();
 }
 
+#if GOOGLE_PROTOBUF_ENABLE_EXPERIMENTAL_PARSER
+const char* Interval::_InternalParse(const char* begin, const char* end, void* object,
+                  ::google::protobuf::internal::ParseContext* ctx) {
+  auto msg = static_cast<Interval*>(object);
+  ::google::protobuf::int32 size; (void)size;
+  int depth; (void)depth;
+  ::google::protobuf::uint32 tag;
+  ::google::protobuf::internal::ParseFunc parser_till_end; (void)parser_till_end;
+  auto ptr = begin;
+  while (ptr < end) {
+    ptr = ::google::protobuf::io::Parse32(ptr, &tag);
+    GOOGLE_PROTOBUF_PARSER_ASSERT(ptr);
+    switch (tag >> 3) {
+      // string ref = 1;
+      case 1: {
+        if (static_cast<::google::protobuf::uint8>(tag) != 10) goto handle_unusual;
+        ptr = ::google::protobuf::io::ReadSize(ptr, &size);
+        GOOGLE_PROTOBUF_PARSER_ASSERT(ptr);
+        ctx->extra_parse_data().SetFieldName("genomestore.Interval.ref");
+        object = msg->mutable_ref();
+        if (size > end - ptr + ::google::protobuf::internal::ParseContext::kSlopBytes) {
+          parser_till_end = ::google::protobuf::internal::GreedyStringParserUTF8;
+          goto string_till_end;
+        }
+        GOOGLE_PROTOBUF_PARSER_ASSERT(::google::protobuf::internal::StringCheckUTF8(ptr, size, ctx));
+        ::google::protobuf::internal::InlineGreedyStringParser(object, ptr, size, ctx);
+        ptr += size;
+        break;
+      }
+      // string chr = 2;
+      case 2: {
+        if (static_cast<::google::protobuf::uint8>(tag) != 18) goto handle_unusual;
+        ptr = ::google::protobuf::io::ReadSize(ptr, &size);
+        GOOGLE_PROTOBUF_PARSER_ASSERT(ptr);
+        ctx->extra_parse_data().SetFieldName("genomestore.Interval.chr");
+        object = msg->mutable_chr();
+        if (size > end - ptr + ::google::protobuf::internal::ParseContext::kSlopBytes) {
+          parser_till_end = ::google::protobuf::internal::GreedyStringParserUTF8;
+          goto string_till_end;
+        }
+        GOOGLE_PROTOBUF_PARSER_ASSERT(::google::protobuf::internal::StringCheckUTF8(ptr, size, ctx));
+        ::google::protobuf::internal::InlineGreedyStringParser(object, ptr, size, ctx);
+        ptr += size;
+        break;
+      }
+      // uint32 start = 3;
+      case 3: {
+        if (static_cast<::google::protobuf::uint8>(tag) != 24) goto handle_unusual;
+        msg->set_start(::google::protobuf::internal::ReadVarint(&ptr));
+        GOOGLE_PROTOBUF_PARSER_ASSERT(ptr);
+        break;
+      }
+      // uint32 len = 4;
+      case 4: {
+        if (static_cast<::google::protobuf::uint8>(tag) != 32) goto handle_unusual;
+        msg->set_len(::google::protobuf::internal::ReadVarint(&ptr));
+        GOOGLE_PROTOBUF_PARSER_ASSERT(ptr);
+        break;
+      }
+      // bool strand = 5;
+      case 5: {
+        if (static_cast<::google::protobuf::uint8>(tag) != 40) goto handle_unusual;
+        msg->set_strand(::google::protobuf::internal::ReadVarint(&ptr));
+        GOOGLE_PROTOBUF_PARSER_ASSERT(ptr);
+        break;
+      }
+      // repeated .genomestore.Base seq = 6;
+      case 6: {
+        if (static_cast<::google::protobuf::uint8>(tag) == 50) {
+          ptr = ::google::protobuf::io::ReadSize(ptr, &size);
+          GOOGLE_PROTOBUF_PARSER_ASSERT(ptr);
+          parser_till_end = ::google::protobuf::internal::PackedEnumParser;
+          object = msg->mutable_seq();
+          if (size > end - ptr) goto len_delim_till_end;
+          auto newend = ptr + size;
+          if (size) ptr = parser_till_end(ptr, newend, object, ctx);
+          GOOGLE_PROTOBUF_PARSER_ASSERT(ptr == newend);
+          break;
+        } else if (static_cast<::google::protobuf::uint8>(tag) != 48) goto handle_unusual;
+        do {
+          ::google::protobuf::uint64 val = ::google::protobuf::internal::ReadVarint(&ptr);
+          msg->add_seq(static_cast<::genomestore::Base>(val));
+          GOOGLE_PROTOBUF_PARSER_ASSERT(ptr);
+          if (ptr >= end) break;
+        } while ((::google::protobuf::io::UnalignedLoad<::google::protobuf::uint64>(ptr) & 255) == 48 && (ptr += 1));
+        break;
+      }
+      // string seqs = 7;
+      case 7: {
+        if (static_cast<::google::protobuf::uint8>(tag) != 58) goto handle_unusual;
+        ptr = ::google::protobuf::io::ReadSize(ptr, &size);
+        GOOGLE_PROTOBUF_PARSER_ASSERT(ptr);
+        ctx->extra_parse_data().SetFieldName("genomestore.Interval.seqs");
+        object = msg->mutable_seqs();
+        if (size > end - ptr + ::google::protobuf::internal::ParseContext::kSlopBytes) {
+          parser_till_end = ::google::protobuf::internal::GreedyStringParserUTF8;
+          goto string_till_end;
+        }
+        GOOGLE_PROTOBUF_PARSER_ASSERT(::google::protobuf::internal::StringCheckUTF8(ptr, size, ctx));
+        ::google::protobuf::internal::InlineGreedyStringParser(object, ptr, size, ctx);
+        ptr += size;
+        break;
+      }
+      // float score = 8;
+      case 8: {
+        if (static_cast<::google::protobuf::uint8>(tag) != 69) goto handle_unusual;
+        msg->set_score(::google::protobuf::io::UnalignedLoad<float>(ptr));
+        ptr += sizeof(float);
+        break;
+      }
+      default: {
+      handle_unusual:
+        if ((tag & 7) == 4 || tag == 0) {
+          ctx->EndGroup(tag);
+          return ptr;
+        }
+        auto res = UnknownFieldParse(tag, {_InternalParse, msg},
+          ptr, end, msg->_internal_metadata_.mutable_unknown_fields(), ctx);
+        ptr = res.first;
+        GOOGLE_PROTOBUF_PARSER_ASSERT(ptr != nullptr);
+        if (res.second) return ptr;
+      }
+    }  // switch
+  }  // while
+  return ptr;
+string_till_end:
+  static_cast<::std::string*>(object)->clear();
+  static_cast<::std::string*>(object)->reserve(size);
+  goto len_delim_till_end;
+len_delim_till_end:
+  return ctx->StoreAndTailCall(ptr, end, {_InternalParse, msg},
+                               {parser_till_end, object}, size);
+}
+#else  // GOOGLE_PROTOBUF_ENABLE_EXPERIMENTAL_PARSER
 bool Interval::MergePartialFromCodedStream(
     ::google::protobuf::io::CodedInputStream* input) {
-#define DO_(EXPRESSION) if (!GOOGLE_PREDICT_TRUE(EXPRESSION)) goto failure
+#define DO_(EXPRESSION) if (!PROTOBUF_PREDICT_TRUE(EXPRESSION)) goto failure
   ::google::protobuf::uint32 tag;
   // @@protoc_insertion_point(parse_start:genomestore.Interval)
   for (;;) {
@@ -288,8 +398,7 @@ bool Interval::MergePartialFromCodedStream(
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
       // string ref = 1;
       case 1: {
-        if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(10u /* 10 & 0xFF */)) {
+        if (static_cast< ::google::protobuf::uint8>(tag) == (10 & 0xFF)) {
           DO_(::google::protobuf::internal::WireFormatLite::ReadString(
                 input, this->mutable_ref()));
           DO_(::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
@@ -304,8 +413,7 @@ bool Interval::MergePartialFromCodedStream(
 
       // string chr = 2;
       case 2: {
-        if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(18u /* 18 & 0xFF */)) {
+        if (static_cast< ::google::protobuf::uint8>(tag) == (18 & 0xFF)) {
           DO_(::google::protobuf::internal::WireFormatLite::ReadString(
                 input, this->mutable_chr()));
           DO_(::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
@@ -320,8 +428,7 @@ bool Interval::MergePartialFromCodedStream(
 
       // uint32 start = 3;
       case 3: {
-        if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(24u /* 24 & 0xFF */)) {
+        if (static_cast< ::google::protobuf::uint8>(tag) == (24 & 0xFF)) {
 
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    ::google::protobuf::uint32, ::google::protobuf::internal::WireFormatLite::TYPE_UINT32>(
@@ -334,8 +441,7 @@ bool Interval::MergePartialFromCodedStream(
 
       // uint32 len = 4;
       case 4: {
-        if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(32u /* 32 & 0xFF */)) {
+        if (static_cast< ::google::protobuf::uint8>(tag) == (32 & 0xFF)) {
 
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    ::google::protobuf::uint32, ::google::protobuf::internal::WireFormatLite::TYPE_UINT32>(
@@ -348,8 +454,7 @@ bool Interval::MergePartialFromCodedStream(
 
       // bool strand = 5;
       case 5: {
-        if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(40u /* 40 & 0xFF */)) {
+        if (static_cast< ::google::protobuf::uint8>(tag) == (40 & 0xFF)) {
 
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    bool, ::google::protobuf::internal::WireFormatLite::TYPE_BOOL>(
@@ -362,23 +467,20 @@ bool Interval::MergePartialFromCodedStream(
 
       // repeated .genomestore.Base seq = 6;
       case 6: {
-        if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(50u /* 50 & 0xFF */)) {
+        if (static_cast< ::google::protobuf::uint8>(tag) == (50 & 0xFF)) {
           ::google::protobuf::uint32 length;
           DO_(input->ReadVarint32(&length));
           ::google::protobuf::io::CodedInputStream::Limit limit = input->PushLimit(static_cast<int>(length));
           while (input->BytesUntilLimit() > 0) {
-            int value;
+            int value = 0;
             DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    int, ::google::protobuf::internal::WireFormatLite::TYPE_ENUM>(
                  input, &value)));
             add_seq(static_cast< ::genomestore::Base >(value));
           }
           input->PopLimit(limit);
-        } else if (
-            static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(48u /* 48 & 0xFF */)) {
-          int value;
+        } else if (static_cast< ::google::protobuf::uint8>(tag) == (48 & 0xFF)) {
+          int value = 0;
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    int, ::google::protobuf::internal::WireFormatLite::TYPE_ENUM>(
                  input, &value)));
@@ -391,8 +493,7 @@ bool Interval::MergePartialFromCodedStream(
 
       // string seqs = 7;
       case 7: {
-        if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(58u /* 58 & 0xFF */)) {
+        if (static_cast< ::google::protobuf::uint8>(tag) == (58 & 0xFF)) {
           DO_(::google::protobuf::internal::WireFormatLite::ReadString(
                 input, this->mutable_seqs()));
           DO_(::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
@@ -407,8 +508,7 @@ bool Interval::MergePartialFromCodedStream(
 
       // float score = 8;
       case 8: {
-        if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(69u /* 69 & 0xFF */)) {
+        if (static_cast< ::google::protobuf::uint8>(tag) == (69 & 0xFF)) {
 
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    float, ::google::protobuf::internal::WireFormatLite::TYPE_FLOAT>(
@@ -438,6 +538,7 @@ failure:
   return false;
 #undef DO_
 }
+#endif  // GOOGLE_PROTOBUF_ENABLE_EXPERIMENTAL_PARSER
 
 void Interval::SerializeWithCachedSizes(
     ::google::protobuf::io::CodedOutputStream* output) const {
@@ -486,8 +587,8 @@ void Interval::SerializeWithCachedSizes(
       6,
       ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED,
       output);
-    output->WriteVarint32(
-        static_cast< ::google::protobuf::uint32>(_seq_cached_byte_size_));
+    output->WriteVarint32(_seq_cached_byte_size_.load(
+        std::memory_order_relaxed));
   }
   for (int i = 0, n = this->seq_size(); i < n; i++) {
     ::google::protobuf::internal::WireFormatLite::WriteEnumNoTag(
@@ -509,16 +610,15 @@ void Interval::SerializeWithCachedSizes(
     ::google::protobuf::internal::WireFormatLite::WriteFloat(8, this->score(), output);
   }
 
-  if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
+  if (_internal_metadata_.have_unknown_fields()) {
     ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
-        (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()), output);
+        _internal_metadata_.unknown_fields(), output);
   }
   // @@protoc_insertion_point(serialize_end:genomestore.Interval)
 }
 
 ::google::protobuf::uint8* Interval::InternalSerializeWithCachedSizesToArray(
-    bool deterministic, ::google::protobuf::uint8* target) const {
-  (void)deterministic; // Unused
+    ::google::protobuf::uint8* target) const {
   // @@protoc_insertion_point(serialize_to_array_start:genomestore.Interval)
   ::google::protobuf::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
@@ -566,8 +666,8 @@ void Interval::SerializeWithCachedSizes(
       6,
       ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED,
       target);
-    target = ::google::protobuf::io::CodedOutputStream::WriteVarint32ToArray(      static_cast< ::google::protobuf::uint32>(
-            _seq_cached_byte_size_), target);
+    target = ::google::protobuf::io::CodedOutputStream::WriteVarint32ToArray(      _seq_cached_byte_size_.load(std::memory_order_relaxed),
+        target);
     target = ::google::protobuf::internal::WireFormatLite::WriteEnumNoTagToArray(
       this->seq_, target);
   }
@@ -588,9 +688,9 @@ void Interval::SerializeWithCachedSizes(
     target = ::google::protobuf::internal::WireFormatLite::WriteFloatToArray(8, this->score(), target);
   }
 
-  if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
+  if (_internal_metadata_.have_unknown_fields()) {
     target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
-        (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()), target);
+        _internal_metadata_.unknown_fields(), target);
   }
   // @@protoc_insertion_point(serialize_to_array_end:genomestore.Interval)
   return target;
@@ -600,11 +700,15 @@ size_t Interval::ByteSizeLong() const {
 // @@protoc_insertion_point(message_byte_size_start:genomestore.Interval)
   size_t total_size = 0;
 
-  if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
+  if (_internal_metadata_.have_unknown_fields()) {
     total_size +=
       ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
-        (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()));
+        _internal_metadata_.unknown_fields());
   }
+  ::google::protobuf::uint32 cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
   // repeated .genomestore.Base seq = 6;
   {
     size_t data_size = 0;
@@ -615,12 +719,11 @@ size_t Interval::ByteSizeLong() const {
     if (data_size > 0) {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::Int32Size(
-            static_cast< ::google::protobuf::int32>(data_size));
+            static_cast<::google::protobuf::int32>(data_size));
     }
     int cached_size = ::google::protobuf::internal::ToCachedSize(data_size);
-    GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
-    _seq_cached_byte_size_ = cached_size;
-    GOOGLE_SAFE_CONCURRENT_WRITES_END();
+    _seq_cached_byte_size_.store(cached_size,
+                                    std::memory_order_relaxed);
     total_size += data_size;
   }
 
@@ -678,9 +781,9 @@ void Interval::MergeFrom(const ::google::protobuf::Message& from) {
 // @@protoc_insertion_point(generalized_merge_from_start:genomestore.Interval)
   GOOGLE_DCHECK_NE(&from, this);
   const Interval* source =
-      ::google::protobuf::internal::DynamicCastToGenerated<const Interval>(
+      ::google::protobuf::DynamicCastToGenerated<Interval>(
           &from);
-  if (source == NULL) {
+  if (source == nullptr) {
   // @@protoc_insertion_point(generalized_merge_from_cast_fail:genomestore.Interval)
     ::google::protobuf::internal::ReflectionOps::Merge(from, this);
   } else {
@@ -747,6 +850,7 @@ void Interval::Swap(Interval* other) {
 }
 void Interval::InternalSwap(Interval* other) {
   using std::swap;
+  _internal_metadata_.Swap(&other->_internal_metadata_);
   seq_.InternalSwap(&other->seq_);
   ref_.Swap(&other->ref_, &::google::protobuf::internal::GetEmptyStringAlreadyInited(),
     GetArenaNoVirtual());
@@ -758,12 +862,11 @@ void Interval::InternalSwap(Interval* other) {
   swap(len_, other->len_);
   swap(strand_, other->strand_);
   swap(score_, other->score_);
-  _internal_metadata_.Swap(&other->_internal_metadata_);
 }
 
 ::google::protobuf::Metadata Interval::GetMetadata() const {
-  protobuf_genomestore_2eproto::protobuf_AssignDescriptorsOnce();
-  return ::protobuf_genomestore_2eproto::file_level_metadata[kIndexInFileMessages];
+  ::google::protobuf::internal::AssignDescriptors(&::assign_descriptors_table_genomestore_2eproto);
+  return ::file_level_metadata_genomestore_2eproto[kIndexInFileMessages];
 }
 
 
@@ -774,6 +877,20 @@ void Gene::InitAsDefaultInstance() {
       ::genomestore::Interval::internal_default_instance());
   ::genomestore::_Gene_default_instance_._instance.get_mutable()->cds_ = const_cast< ::genomestore::Interval*>(
       ::genomestore::Interval::internal_default_instance());
+}
+class Gene::HasBitSetters {
+ public:
+  static const ::genomestore::Interval& tx(const Gene* msg);
+  static const ::genomestore::Interval& cds(const Gene* msg);
+};
+
+const ::genomestore::Interval&
+Gene::HasBitSetters::tx(const Gene* msg) {
+  return *msg->tx_;
+}
+const ::genomestore::Interval&
+Gene::HasBitSetters::cds(const Gene* msg) {
+  return *msg->cds_;
 }
 #if !defined(_MSC_VER) || _MSC_VER >= 1900
 const int Gene::kIdFieldNumber;
@@ -787,15 +904,13 @@ const int Gene::kIntronsFieldNumber;
 #endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
 
 Gene::Gene()
-  : ::google::protobuf::Message(), _internal_metadata_(NULL) {
-  ::google::protobuf::internal::InitSCC(
-      &protobuf_genomestore_2eproto::scc_info_Gene.base);
+  : ::google::protobuf::Message(), _internal_metadata_(nullptr) {
   SharedCtor();
   // @@protoc_insertion_point(constructor:genomestore.Gene)
 }
 Gene::Gene(const Gene& from)
   : ::google::protobuf::Message(),
-      _internal_metadata_(NULL),
+      _internal_metadata_(nullptr),
       exons_(from.exons_),
       introns_(from.introns_) {
   _internal_metadata_.MergeFrom(from._internal_metadata_);
@@ -818,17 +933,19 @@ Gene::Gene(const Gene& from)
   if (from.has_tx()) {
     tx_ = new ::genomestore::Interval(*from.tx_);
   } else {
-    tx_ = NULL;
+    tx_ = nullptr;
   }
   if (from.has_cds()) {
     cds_ = new ::genomestore::Interval(*from.cds_);
   } else {
-    cds_ = NULL;
+    cds_ = nullptr;
   }
   // @@protoc_insertion_point(copy_constructor:genomestore.Gene)
 }
 
 void Gene::SharedCtor() {
+  ::google::protobuf::internal::InitSCC(
+      &scc_info_Gene_genomestore_2eproto.base);
   id_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   sym_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   ref_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
@@ -855,13 +972,8 @@ void Gene::SharedDtor() {
 void Gene::SetCachedSize(int size) const {
   _cached_size_.Set(size);
 }
-const ::google::protobuf::Descriptor* Gene::descriptor() {
-  ::protobuf_genomestore_2eproto::protobuf_AssignDescriptorsOnce();
-  return ::protobuf_genomestore_2eproto::file_level_metadata[kIndexInFileMessages].descriptor;
-}
-
 const Gene& Gene::default_instance() {
-  ::google::protobuf::internal::InitSCC(&protobuf_genomestore_2eproto::scc_info_Gene.base);
+  ::google::protobuf::internal::InitSCC(&::scc_info_Gene_genomestore_2eproto.base);
   return *internal_default_instance();
 }
 
@@ -878,20 +990,179 @@ void Gene::Clear() {
   sym_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   ref_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   chr_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  if (GetArenaNoVirtual() == NULL && tx_ != NULL) {
+  if (GetArenaNoVirtual() == nullptr && tx_ != nullptr) {
     delete tx_;
   }
-  tx_ = NULL;
-  if (GetArenaNoVirtual() == NULL && cds_ != NULL) {
+  tx_ = nullptr;
+  if (GetArenaNoVirtual() == nullptr && cds_ != nullptr) {
     delete cds_;
   }
-  cds_ = NULL;
+  cds_ = nullptr;
   _internal_metadata_.Clear();
 }
 
+#if GOOGLE_PROTOBUF_ENABLE_EXPERIMENTAL_PARSER
+const char* Gene::_InternalParse(const char* begin, const char* end, void* object,
+                  ::google::protobuf::internal::ParseContext* ctx) {
+  auto msg = static_cast<Gene*>(object);
+  ::google::protobuf::int32 size; (void)size;
+  int depth; (void)depth;
+  ::google::protobuf::uint32 tag;
+  ::google::protobuf::internal::ParseFunc parser_till_end; (void)parser_till_end;
+  auto ptr = begin;
+  while (ptr < end) {
+    ptr = ::google::protobuf::io::Parse32(ptr, &tag);
+    GOOGLE_PROTOBUF_PARSER_ASSERT(ptr);
+    switch (tag >> 3) {
+      // string id = 1;
+      case 1: {
+        if (static_cast<::google::protobuf::uint8>(tag) != 10) goto handle_unusual;
+        ptr = ::google::protobuf::io::ReadSize(ptr, &size);
+        GOOGLE_PROTOBUF_PARSER_ASSERT(ptr);
+        ctx->extra_parse_data().SetFieldName("genomestore.Gene.id");
+        object = msg->mutable_id();
+        if (size > end - ptr + ::google::protobuf::internal::ParseContext::kSlopBytes) {
+          parser_till_end = ::google::protobuf::internal::GreedyStringParserUTF8;
+          goto string_till_end;
+        }
+        GOOGLE_PROTOBUF_PARSER_ASSERT(::google::protobuf::internal::StringCheckUTF8(ptr, size, ctx));
+        ::google::protobuf::internal::InlineGreedyStringParser(object, ptr, size, ctx);
+        ptr += size;
+        break;
+      }
+      // string sym = 2;
+      case 2: {
+        if (static_cast<::google::protobuf::uint8>(tag) != 18) goto handle_unusual;
+        ptr = ::google::protobuf::io::ReadSize(ptr, &size);
+        GOOGLE_PROTOBUF_PARSER_ASSERT(ptr);
+        ctx->extra_parse_data().SetFieldName("genomestore.Gene.sym");
+        object = msg->mutable_sym();
+        if (size > end - ptr + ::google::protobuf::internal::ParseContext::kSlopBytes) {
+          parser_till_end = ::google::protobuf::internal::GreedyStringParserUTF8;
+          goto string_till_end;
+        }
+        GOOGLE_PROTOBUF_PARSER_ASSERT(::google::protobuf::internal::StringCheckUTF8(ptr, size, ctx));
+        ::google::protobuf::internal::InlineGreedyStringParser(object, ptr, size, ctx);
+        ptr += size;
+        break;
+      }
+      // string ref = 3;
+      case 3: {
+        if (static_cast<::google::protobuf::uint8>(tag) != 26) goto handle_unusual;
+        ptr = ::google::protobuf::io::ReadSize(ptr, &size);
+        GOOGLE_PROTOBUF_PARSER_ASSERT(ptr);
+        ctx->extra_parse_data().SetFieldName("genomestore.Gene.ref");
+        object = msg->mutable_ref();
+        if (size > end - ptr + ::google::protobuf::internal::ParseContext::kSlopBytes) {
+          parser_till_end = ::google::protobuf::internal::GreedyStringParserUTF8;
+          goto string_till_end;
+        }
+        GOOGLE_PROTOBUF_PARSER_ASSERT(::google::protobuf::internal::StringCheckUTF8(ptr, size, ctx));
+        ::google::protobuf::internal::InlineGreedyStringParser(object, ptr, size, ctx);
+        ptr += size;
+        break;
+      }
+      // string chr = 4;
+      case 4: {
+        if (static_cast<::google::protobuf::uint8>(tag) != 34) goto handle_unusual;
+        ptr = ::google::protobuf::io::ReadSize(ptr, &size);
+        GOOGLE_PROTOBUF_PARSER_ASSERT(ptr);
+        ctx->extra_parse_data().SetFieldName("genomestore.Gene.chr");
+        object = msg->mutable_chr();
+        if (size > end - ptr + ::google::protobuf::internal::ParseContext::kSlopBytes) {
+          parser_till_end = ::google::protobuf::internal::GreedyStringParserUTF8;
+          goto string_till_end;
+        }
+        GOOGLE_PROTOBUF_PARSER_ASSERT(::google::protobuf::internal::StringCheckUTF8(ptr, size, ctx));
+        ::google::protobuf::internal::InlineGreedyStringParser(object, ptr, size, ctx);
+        ptr += size;
+        break;
+      }
+      // .genomestore.Interval tx = 5;
+      case 5: {
+        if (static_cast<::google::protobuf::uint8>(tag) != 42) goto handle_unusual;
+        ptr = ::google::protobuf::io::ReadSize(ptr, &size);
+        GOOGLE_PROTOBUF_PARSER_ASSERT(ptr);
+        parser_till_end = ::genomestore::Interval::_InternalParse;
+        object = msg->mutable_tx();
+        if (size > end - ptr) goto len_delim_till_end;
+        ptr += size;
+        GOOGLE_PROTOBUF_PARSER_ASSERT(ctx->ParseExactRange(
+            {parser_till_end, object}, ptr - size, ptr));
+        break;
+      }
+      // .genomestore.Interval cds = 6;
+      case 6: {
+        if (static_cast<::google::protobuf::uint8>(tag) != 50) goto handle_unusual;
+        ptr = ::google::protobuf::io::ReadSize(ptr, &size);
+        GOOGLE_PROTOBUF_PARSER_ASSERT(ptr);
+        parser_till_end = ::genomestore::Interval::_InternalParse;
+        object = msg->mutable_cds();
+        if (size > end - ptr) goto len_delim_till_end;
+        ptr += size;
+        GOOGLE_PROTOBUF_PARSER_ASSERT(ctx->ParseExactRange(
+            {parser_till_end, object}, ptr - size, ptr));
+        break;
+      }
+      // repeated .genomestore.Interval exons = 7;
+      case 7: {
+        if (static_cast<::google::protobuf::uint8>(tag) != 58) goto handle_unusual;
+        do {
+          ptr = ::google::protobuf::io::ReadSize(ptr, &size);
+          GOOGLE_PROTOBUF_PARSER_ASSERT(ptr);
+          parser_till_end = ::genomestore::Interval::_InternalParse;
+          object = msg->add_exons();
+          if (size > end - ptr) goto len_delim_till_end;
+          ptr += size;
+          GOOGLE_PROTOBUF_PARSER_ASSERT(ctx->ParseExactRange(
+              {parser_till_end, object}, ptr - size, ptr));
+          if (ptr >= end) break;
+        } while ((::google::protobuf::io::UnalignedLoad<::google::protobuf::uint64>(ptr) & 255) == 58 && (ptr += 1));
+        break;
+      }
+      // repeated .genomestore.Interval introns = 8;
+      case 8: {
+        if (static_cast<::google::protobuf::uint8>(tag) != 66) goto handle_unusual;
+        do {
+          ptr = ::google::protobuf::io::ReadSize(ptr, &size);
+          GOOGLE_PROTOBUF_PARSER_ASSERT(ptr);
+          parser_till_end = ::genomestore::Interval::_InternalParse;
+          object = msg->add_introns();
+          if (size > end - ptr) goto len_delim_till_end;
+          ptr += size;
+          GOOGLE_PROTOBUF_PARSER_ASSERT(ctx->ParseExactRange(
+              {parser_till_end, object}, ptr - size, ptr));
+          if (ptr >= end) break;
+        } while ((::google::protobuf::io::UnalignedLoad<::google::protobuf::uint64>(ptr) & 255) == 66 && (ptr += 1));
+        break;
+      }
+      default: {
+      handle_unusual:
+        if ((tag & 7) == 4 || tag == 0) {
+          ctx->EndGroup(tag);
+          return ptr;
+        }
+        auto res = UnknownFieldParse(tag, {_InternalParse, msg},
+          ptr, end, msg->_internal_metadata_.mutable_unknown_fields(), ctx);
+        ptr = res.first;
+        GOOGLE_PROTOBUF_PARSER_ASSERT(ptr != nullptr);
+        if (res.second) return ptr;
+      }
+    }  // switch
+  }  // while
+  return ptr;
+string_till_end:
+  static_cast<::std::string*>(object)->clear();
+  static_cast<::std::string*>(object)->reserve(size);
+  goto len_delim_till_end;
+len_delim_till_end:
+  return ctx->StoreAndTailCall(ptr, end, {_InternalParse, msg},
+                               {parser_till_end, object}, size);
+}
+#else  // GOOGLE_PROTOBUF_ENABLE_EXPERIMENTAL_PARSER
 bool Gene::MergePartialFromCodedStream(
     ::google::protobuf::io::CodedInputStream* input) {
-#define DO_(EXPRESSION) if (!GOOGLE_PREDICT_TRUE(EXPRESSION)) goto failure
+#define DO_(EXPRESSION) if (!PROTOBUF_PREDICT_TRUE(EXPRESSION)) goto failure
   ::google::protobuf::uint32 tag;
   // @@protoc_insertion_point(parse_start:genomestore.Gene)
   for (;;) {
@@ -901,8 +1172,7 @@ bool Gene::MergePartialFromCodedStream(
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
       // string id = 1;
       case 1: {
-        if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(10u /* 10 & 0xFF */)) {
+        if (static_cast< ::google::protobuf::uint8>(tag) == (10 & 0xFF)) {
           DO_(::google::protobuf::internal::WireFormatLite::ReadString(
                 input, this->mutable_id()));
           DO_(::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
@@ -917,8 +1187,7 @@ bool Gene::MergePartialFromCodedStream(
 
       // string sym = 2;
       case 2: {
-        if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(18u /* 18 & 0xFF */)) {
+        if (static_cast< ::google::protobuf::uint8>(tag) == (18 & 0xFF)) {
           DO_(::google::protobuf::internal::WireFormatLite::ReadString(
                 input, this->mutable_sym()));
           DO_(::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
@@ -933,8 +1202,7 @@ bool Gene::MergePartialFromCodedStream(
 
       // string ref = 3;
       case 3: {
-        if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(26u /* 26 & 0xFF */)) {
+        if (static_cast< ::google::protobuf::uint8>(tag) == (26 & 0xFF)) {
           DO_(::google::protobuf::internal::WireFormatLite::ReadString(
                 input, this->mutable_ref()));
           DO_(::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
@@ -949,8 +1217,7 @@ bool Gene::MergePartialFromCodedStream(
 
       // string chr = 4;
       case 4: {
-        if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(34u /* 34 & 0xFF */)) {
+        if (static_cast< ::google::protobuf::uint8>(tag) == (34 & 0xFF)) {
           DO_(::google::protobuf::internal::WireFormatLite::ReadString(
                 input, this->mutable_chr()));
           DO_(::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
@@ -965,8 +1232,7 @@ bool Gene::MergePartialFromCodedStream(
 
       // .genomestore.Interval tx = 5;
       case 5: {
-        if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(42u /* 42 & 0xFF */)) {
+        if (static_cast< ::google::protobuf::uint8>(tag) == (42 & 0xFF)) {
           DO_(::google::protobuf::internal::WireFormatLite::ReadMessage(
                input, mutable_tx()));
         } else {
@@ -977,8 +1243,7 @@ bool Gene::MergePartialFromCodedStream(
 
       // .genomestore.Interval cds = 6;
       case 6: {
-        if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(50u /* 50 & 0xFF */)) {
+        if (static_cast< ::google::protobuf::uint8>(tag) == (50 & 0xFF)) {
           DO_(::google::protobuf::internal::WireFormatLite::ReadMessage(
                input, mutable_cds()));
         } else {
@@ -989,8 +1254,7 @@ bool Gene::MergePartialFromCodedStream(
 
       // repeated .genomestore.Interval exons = 7;
       case 7: {
-        if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(58u /* 58 & 0xFF */)) {
+        if (static_cast< ::google::protobuf::uint8>(tag) == (58 & 0xFF)) {
           DO_(::google::protobuf::internal::WireFormatLite::ReadMessage(
                 input, add_exons()));
         } else {
@@ -1001,8 +1265,7 @@ bool Gene::MergePartialFromCodedStream(
 
       // repeated .genomestore.Interval introns = 8;
       case 8: {
-        if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(66u /* 66 & 0xFF */)) {
+        if (static_cast< ::google::protobuf::uint8>(tag) == (66 & 0xFF)) {
           DO_(::google::protobuf::internal::WireFormatLite::ReadMessage(
                 input, add_introns()));
         } else {
@@ -1030,6 +1293,7 @@ failure:
   return false;
 #undef DO_
 }
+#endif  // GOOGLE_PROTOBUF_ENABLE_EXPERIMENTAL_PARSER
 
 void Gene::SerializeWithCachedSizes(
     ::google::protobuf::io::CodedOutputStream* output) const {
@@ -1080,13 +1344,13 @@ void Gene::SerializeWithCachedSizes(
   // .genomestore.Interval tx = 5;
   if (this->has_tx()) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
-      5, this->_internal_tx(), output);
+      5, HasBitSetters::tx(this), output);
   }
 
   // .genomestore.Interval cds = 6;
   if (this->has_cds()) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
-      6, this->_internal_cds(), output);
+      6, HasBitSetters::cds(this), output);
   }
 
   // repeated .genomestore.Interval exons = 7;
@@ -1107,16 +1371,15 @@ void Gene::SerializeWithCachedSizes(
       output);
   }
 
-  if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
+  if (_internal_metadata_.have_unknown_fields()) {
     ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
-        (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()), output);
+        _internal_metadata_.unknown_fields(), output);
   }
   // @@protoc_insertion_point(serialize_end:genomestore.Gene)
 }
 
 ::google::protobuf::uint8* Gene::InternalSerializeWithCachedSizesToArray(
-    bool deterministic, ::google::protobuf::uint8* target) const {
-  (void)deterministic; // Unused
+    ::google::protobuf::uint8* target) const {
   // @@protoc_insertion_point(serialize_to_array_start:genomestore.Gene)
   ::google::protobuf::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
@@ -1169,14 +1432,14 @@ void Gene::SerializeWithCachedSizes(
   if (this->has_tx()) {
     target = ::google::protobuf::internal::WireFormatLite::
       InternalWriteMessageToArray(
-        5, this->_internal_tx(), deterministic, target);
+        5, HasBitSetters::tx(this), target);
   }
 
   // .genomestore.Interval cds = 6;
   if (this->has_cds()) {
     target = ::google::protobuf::internal::WireFormatLite::
       InternalWriteMessageToArray(
-        6, this->_internal_cds(), deterministic, target);
+        6, HasBitSetters::cds(this), target);
   }
 
   // repeated .genomestore.Interval exons = 7;
@@ -1184,7 +1447,7 @@ void Gene::SerializeWithCachedSizes(
       n = static_cast<unsigned int>(this->exons_size()); i < n; i++) {
     target = ::google::protobuf::internal::WireFormatLite::
       InternalWriteMessageToArray(
-        7, this->exons(static_cast<int>(i)), deterministic, target);
+        7, this->exons(static_cast<int>(i)), target);
   }
 
   // repeated .genomestore.Interval introns = 8;
@@ -1192,12 +1455,12 @@ void Gene::SerializeWithCachedSizes(
       n = static_cast<unsigned int>(this->introns_size()); i < n; i++) {
     target = ::google::protobuf::internal::WireFormatLite::
       InternalWriteMessageToArray(
-        8, this->introns(static_cast<int>(i)), deterministic, target);
+        8, this->introns(static_cast<int>(i)), target);
   }
 
-  if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
+  if (_internal_metadata_.have_unknown_fields()) {
     target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
-        (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()), target);
+        _internal_metadata_.unknown_fields(), target);
   }
   // @@protoc_insertion_point(serialize_to_array_end:genomestore.Gene)
   return target;
@@ -1207,11 +1470,15 @@ size_t Gene::ByteSizeLong() const {
 // @@protoc_insertion_point(message_byte_size_start:genomestore.Gene)
   size_t total_size = 0;
 
-  if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
+  if (_internal_metadata_.have_unknown_fields()) {
     total_size +=
       ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
-        (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()));
+        _internal_metadata_.unknown_fields());
   }
+  ::google::protobuf::uint32 cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
   // repeated .genomestore.Interval exons = 7;
   {
     unsigned int count = static_cast<unsigned int>(this->exons_size());
@@ -1285,9 +1552,9 @@ void Gene::MergeFrom(const ::google::protobuf::Message& from) {
 // @@protoc_insertion_point(generalized_merge_from_start:genomestore.Gene)
   GOOGLE_DCHECK_NE(&from, this);
   const Gene* source =
-      ::google::protobuf::internal::DynamicCastToGenerated<const Gene>(
+      ::google::protobuf::DynamicCastToGenerated<Gene>(
           &from);
-  if (source == NULL) {
+  if (source == nullptr) {
   // @@protoc_insertion_point(generalized_merge_from_cast_fail:genomestore.Gene)
     ::google::protobuf::internal::ReflectionOps::Merge(from, this);
   } else {
@@ -1353,6 +1620,7 @@ void Gene::Swap(Gene* other) {
 }
 void Gene::InternalSwap(Gene* other) {
   using std::swap;
+  _internal_metadata_.Swap(&other->_internal_metadata_);
   CastToBase(&exons_)->InternalSwap(CastToBase(&other->exons_));
   CastToBase(&introns_)->InternalSwap(CastToBase(&other->introns_));
   id_.Swap(&other->id_, &::google::protobuf::internal::GetEmptyStringAlreadyInited(),
@@ -1365,12 +1633,11 @@ void Gene::InternalSwap(Gene* other) {
     GetArenaNoVirtual());
   swap(tx_, other->tx_);
   swap(cds_, other->cds_);
-  _internal_metadata_.Swap(&other->_internal_metadata_);
 }
 
 ::google::protobuf::Metadata Gene::GetMetadata() const {
-  protobuf_genomestore_2eproto::protobuf_AssignDescriptorsOnce();
-  return ::protobuf_genomestore_2eproto::file_level_metadata[kIndexInFileMessages];
+  ::google::protobuf::internal::AssignDescriptors(&::assign_descriptors_table_genomestore_2eproto);
+  return ::file_level_metadata_genomestore_2eproto[kIndexInFileMessages];
 }
 
 
@@ -1378,13 +1645,14 @@ void Gene::InternalSwap(Gene* other) {
 }  // namespace genomestore
 namespace google {
 namespace protobuf {
-template<> GOOGLE_PROTOBUF_ATTRIBUTE_NOINLINE ::genomestore::Interval* Arena::CreateMaybeMessage< ::genomestore::Interval >(Arena* arena) {
+template<> PROTOBUF_NOINLINE ::genomestore::Interval* Arena::CreateMaybeMessage< ::genomestore::Interval >(Arena* arena) {
   return Arena::CreateInternal< ::genomestore::Interval >(arena);
 }
-template<> GOOGLE_PROTOBUF_ATTRIBUTE_NOINLINE ::genomestore::Gene* Arena::CreateMaybeMessage< ::genomestore::Gene >(Arena* arena) {
+template<> PROTOBUF_NOINLINE ::genomestore::Gene* Arena::CreateMaybeMessage< ::genomestore::Gene >(Arena* arena) {
   return Arena::CreateInternal< ::genomestore::Gene >(arena);
 }
 }  // namespace protobuf
 }  // namespace google
 
 // @@protoc_insertion_point(global_scope)
+#include <google/protobuf/port_undef.inc>
