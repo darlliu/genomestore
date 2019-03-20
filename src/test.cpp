@@ -4,27 +4,22 @@
 #include "interval.hpp"
 #include <catch2/catch.hpp>
 
-TEST_CASE("TESTING BASE DB IO FUNCTIONS")
-{
+TEST_CASE("TESTING BASE DB IO FUNCTIONS") {
   auto bdb = basedb("testdb", "test.db");
-  SECTION("TESTING DB INITIALIZATION")
-  {
+  SECTION("TESTING DB INITIALIZATION") {
     const void *ptr = &bdb.getldb();
     REQUIRE(ptr != nullptr);
   }
-  SECTION("TESTING DB PUT STRING KEY AND VAL")
-  {
+  SECTION("TESTING DB PUT STRING KEY AND VAL") {
     bdb.setdb("testkey", "testval");
     auto msg = bdb.getdb("testkey");
     REQUIRE(msg == "testval");
   }
 }
 
-TEST_CASE("TESTING PROTOS")
-{
+TEST_CASE("TESTING PROTOS") {
   GOOGLE_PROTOBUF_VERIFY_VERSION;
-  SECTION("TESTING INTERVAL PROTOS")
-  {
+  SECTION("TESTING INTERVAL PROTOS") {
     std::string chr = "chr1", ref = "mm9";
     auto k = genomestore::Interval{};
     REQUIRE(k.len() == 0);
@@ -40,10 +35,8 @@ TEST_CASE("TESTING PROTOS")
   }
 }
 
-TEST_CASE("TESTING INTERVAL")
-{
-  SECTION("TESTING INTERVAL INITIALIZATION")
-  {
+TEST_CASE("TESTING INTERVAL") {
+  SECTION("TESTING INTERVAL INITIALIZATION") {
     auto k = inv();
     REQUIRE(k.null());
     REQUIRE(k.empty() == false);
@@ -54,8 +47,7 @@ TEST_CASE("TESTING INTERVAL")
     inv l = inv{"mm10", "chr1", 1000050, 1000100, true};
     REQUIRE((i != l) == true);
   }
-  SECTION("TESTING INTERVAL OPEARTIONS")
-  {
+  SECTION("TESTING INTERVAL OPEARTIONS") {
     inv i = inv{"mm10", "chr1", 1000000, 1000050, true};
     inv j = inv{"mm10", "chr1", 1000050, 1000100, true};
     inv k = inv{"mm10", "chr1", 1000025, 1000050, true};
