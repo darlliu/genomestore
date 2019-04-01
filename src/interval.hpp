@@ -47,7 +47,7 @@ struct inv {
   const bool operator!=(const inv &another) const {
     return !(*this == another);
   };
-  const bool operator<(const inv &another);
+  const bool operator<(const inv &another) const;
   inv operator+(const inv &another);
   inv operator-(const inv &another);
   inv operator/(inv &another) { return (another - (*this)); };

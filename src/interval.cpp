@@ -10,7 +10,8 @@ const bool inv::operator==(const inv &another) const {
 
 const std::string inv::info() const {
   char tmp[256];
-#if WIN32
+#if ISWINDOWS
+  // use safe version if available
   auto fm = sprintf_s(tmp, "[%s, %s]: (%d, %d) @ %s @ {strand: %d}",
                       ref().c_str(), chr().c_str(), start(), end(),
                       seqs().substr(0, 50).c_str(), (int)strand());
@@ -22,7 +23,7 @@ const std::string inv::info() const {
   return std::string(tmp);
 }
 
-const bool inv::operator<(const inv &another) {
+const bool inv::operator<(const inv &another) const {
   if (chr() != another.chr())
     return chr() < another.chr();
   if (another.start() > end())

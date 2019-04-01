@@ -1,5 +1,6 @@
 #define CATCH_CONFIG_MAIN
 #include "base.hpp"
+#include "gene.hpp"
 #include "genomestore.pb.h"
 #include "interval.hpp"
 #include <catch2/catch.hpp>
@@ -63,5 +64,22 @@ TEST_CASE("TESTING INTERVAL") {
     inv j{};
     deserialize_from_db(bdb, "testinterval", j.data());
     REQUIRE((i == j) == true);
+  }
+  SECTION("TESTING GENE") {
+    inv cds = inv{"mm10", "chr1", 1000000, 1000050, true};
+    inv tx = inv{"mm10", "chr1", 1000010, 1000040, true};
+    inv ex1 = inv{"mm10", "chr1", 1000010, 1000020, true};
+    inv ex2 = inv{"mm10", "chr1", 1000030, 1000040, true};
+    gene g = gene{"rf1", "testGene", "mm10", "chr1"};
+    g.set_cds(inv{"mm10", "chr1", 1000000, 1000050, true});
+    g.set_tx(inv{"mm10", "chr1", 1000010, 1000040, true});
+    g.add_exon(inv{"mm10", "chr1", 1000010, 1000020, true});
+    g.add_exon(inv{"mm10", "chr1", 1000030, 1000040, true});
+    g.init_exons();
+    REQUIRE((g.cds() == cds) == true);
+    REQUIRE((g.tx() == tx) == true);
+    REQUIRE((g.get_exons()[0] == ex1) == true);
+    REQUIRE((g.get_exons()[1] == ex2) == true);
+    REQUIRE(g.get_introns()[0].info() != ex1.info());
   }
 }

@@ -21,14 +21,18 @@ private:
 public:
   gene(){};
   gene(std::string &&id) { _gene->set_id(id); };
-  gene(std::string &&id, std::string &&sym) : gene(id) { _gene->set_sym(sym); };
+  gene(std::string &&id, std::string &&sym) : gene(std::move(id)) {
+    _gene->set_sym(sym);
+  };
   gene(std::string &&id, std::string &&sym, std::string &&ref,
        std::string &&chr)
-      : gene(id, sym) {
+      : gene(std::move(id), std::move(sym)) {
     _gene->set_ref(ref);
     _gene->set_chr(chr);
   };
-  void set_tx() const inv tx() const { return inv{_gene->tx()}; };
+  void set_tx(inv &&ii) { _gene->mutable_tx()->CopyFrom(ii.data()); };
+  void set_cds(inv &&ii) { _gene->mutable_cds()->CopyFrom(ii.data()); };
+  const inv tx() const { return inv{_gene->tx()}; };
   const inv cds() const { return inv{_gene->cds()}; };
   const bool strand() const { return cds().strand(); };
   std::string chr() { return _gene->chr(); };
@@ -36,6 +40,24 @@ public:
   std::string info() { return cds().info(); };
   std::vector<inv> get_exons();
   std::vector<inv> get_introns();
+  void add_exon(inv &&i) {
+    auto exp = _gene->mutable_exons();
+    exp->Add()->CopyFrom(i.data());
+  };
+  void init_exons() {
+    for (auto &i : _gene->exons()) {
+      exons.insert(inv{i});
+    }
+  };
+  void add_intron(inv &&i) {
+    auto exp = _gene->mutable_introns();
+    exp->Add()->CopyFrom(i.data());
+  };
+  void init_introns() {
+    for (auto &i : _gene->introns()) {
+      introns.insert(inv{i});
+    }
+  };
   inv utr(const bool);
   inv utr5();
   inv utr3();
