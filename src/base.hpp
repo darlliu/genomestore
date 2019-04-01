@@ -16,7 +16,8 @@
 #include <string>
 #include <vector>
 
-#define ISWINDOWS defined(WIN32) || defined(_WIN32) || defined(__WIN32) && !defined(__CYGWIN__)
+#define ISWINDOWS                                                              \
+  defined(WIN32) || defined(_WIN32) || defined(__WIN32) && !defined(__CYGWIN__)
 #if ISWINDOWS
 #include <experimental/filesystem>
 #else
@@ -96,4 +97,15 @@ typedef MDB_val DBVAL;
 typedef std::unordered_map<std::string, std::vector<std::shared_ptr<basedb>>>
     DB;
 typedef std::unordered_map<std::string, std::shared_ptr<std::ifstream>> DBFSQ;
+
+template <typename T>
+void serialize_to_db(basedb &bdb, const std::string &&key, T &val) {
+  bdb.setdb(key, val.SerializeAsString(), false);
+}
+
+template <typename T>
+void deserialize_from_db(basedb &bdb, const std::string &&key, T &val) {
+  auto _ss = bdb.getdb(key);
+  val.ParseFromString(_ss);
+}
 #endif
