@@ -1,5 +1,6 @@
 #ifndef INTERVAL
 #define INTERVAL
+#include "base.hpp"
 #include "genomestore.pb.h"
 #include <set>
 
@@ -30,6 +31,7 @@ struct inv {
       : inv(std::move(ref), std::move(chr), start, end, strand) {
     _inv->set_seqs(std::move(seqs));
   };
+  genomestore::Interval &data() { return *_inv; };
   const uint32_t len() const { return _inv->len(); };
   const bool null() const { return len() == -1; };
   const bool empty() const { return len() == 0; };
@@ -52,4 +54,14 @@ private:
       std::make_unique<genomestore::Interval>();
 };
 
+template <typename T>
+void serialize_to_db(basedb &bdb, const std::string &&key, T &val) {
+  bdb.setdb(key, val.SerializeAsString(), false);
+}
+
+template <typename T>
+void deserialize_from_db(basedb &bdb, const std::string &&key, T &val) {
+  auto _ss = bdb.getdb(key);
+  val.ParseFromString(_ss);
+}
 #endif
