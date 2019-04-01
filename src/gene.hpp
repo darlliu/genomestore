@@ -20,7 +20,15 @@ private:
 
 public:
   gene(){};
-  const inv tx() const { return inv{_gene->tx()}; };
+  gene(std::string &&id) { _gene->set_id(id); };
+  gene(std::string &&id, std::string &&sym) : gene(id) { _gene->set_sym(sym); };
+  gene(std::string &&id, std::string &&sym, std::string &&ref,
+       std::string &&chr)
+      : gene(id, sym) {
+    _gene->set_ref(ref);
+    _gene->set_chr(chr);
+  };
+  void set_tx() const inv tx() const { return inv{_gene->tx()}; };
   const inv cds() const { return inv{_gene->cds()}; };
   const bool strand() const { return cds().strand(); };
   std::string chr() { return _gene->chr(); };
