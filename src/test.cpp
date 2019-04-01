@@ -56,15 +56,8 @@ TEST_CASE("TESTING INTERVAL") {
     REQUIRE((i / k == inv{}) == true);
     REQUIRE((k / j == j) == true);
   }
-  auto bdb = basedb("testdb", "test.db");
   SECTION("TESTING INTERVAL SERIALIZE") {
-    inv i = inv{"mm10", "chr1", 1000000, 1000050, true};
-    serialize_to_db(bdb, "testinterval", i.data());
-    auto testv = bdb.getdb("testinterval");
-    REQUIRE(testv.size() > 0);
-  }
-
-  SECTION("TESTING INTERVAL SERIALIZE") {
+    auto bdb = basedb("testdb", "test.db");
     inv i = inv{"mm10", "chr1", 1000000, 1000050, true};
     serialize_to_db(bdb, "testinterval", i.data());
     inv j{};
