@@ -13,84 +13,83 @@
 
 class gene {
 private:
-  Gene _gene;
-  std::multiset<interval, [](const Interval &left,
-                             const Interval &right) { return left < right; }>
+  auto _gene = std::make_unique<genomestore::Gene>();
+  std::multiset<inv,
+                [](const inv &left, const inv &right) { return left < right; }>
       introns, exons;
 
 public:
   gene(){};
-  interval tx() { return _gene.tx(); };
-  interval cds() { return _gene.cds(); };
-  std::string chr() const { return sdb->chrs[chr_]; };
-  std::string ref() const { return sdb->name; };
-  unsigned long sz() const { return sdb->sizes[chr()]; };
-  std::string info() { return tx().info(); };
-  std::vector<interval> get_exons() {
-    std::vector<interval> out;
+  inv tx() { return inv{_gene->tx()}; };
+  inv cds() { return inv{_gene->cds()}; };
+  std::string chr() const { return _gene->chr(); };
+  std::string ref() const { return _gene->ref(); };
+  std::string info() { return cds().info(); };
+  std::vector<inv> get_exons() {
+    std::vector<inv> out;
     for (auto &it : exons) {
       out.push_back(it);
     }
     return out;
   };
-  std::vector<interval> get_introns() {
-    std::vector<interval> out;
+  std::vector<inv> get_introns() {
+    std::vector<inv> out;
+    auto exons = get_exons();
     if (exons.size() < 2)
       return out; // no intron in this situation
     auto it = exons.begin();
     auto itt = ++it;
     --it;
     while (itt != exons.end()) {
-      out.push_back(
-          interval{sdb, chr_, it->end + 1, itt->start - 1, idx, strand});
+      out.push_back(inv{ref(), chr(), it->end() + 1, itt->start() - 1, strand});
       ++it;
       ++itt;
     }
     return out;
   };
-  interval utr(const bool s) {
-    unsigned start, end;
+  inv utr(const bool s) {
+    uint32_t start, end;
     if (s) {
-      start = tx_start;
-      end = cds_start - 1;
+      start = tx().start();
+      end = cds().start() - 1;
     } else {
-      start = cds_end + 1;
-      end = tx_end;
+      start = cds().end() + 1;
+      end = tx().end();
     }
-    return interval{sdb, chr_, start, end, idx, strand};
+    return inv{ref(), chr(), start, end, strand};
   };
-  interval utr5() {
+  inv utr5() {
     if (noncoding()) {
       // std::cerr << "Gene at " << idx << " is noncoding, no 5'UTR" <<
       // std::endl;
-      return interval();
+      return inv{};
     }
     return utr(strand);
   };
-  interval utr3() {
+  inv utr3() {
     if (noncoding()) {
       // std::cerr << "Gene at " << idx << " is noncoding, no 3'UTR" <<
       // std::endl;
-      return interval();
+      return inv{};
     }
     return utr(!strand);
   };
-  interval get_p(const int &l, const int &r, const bool &s) {
-    unsigned start, end;
+  inv get_p(const int &l, const int &r, const bool &s) {
+    uint32_t start, end;
     if (s) {
-      start = tx_start - l;
-      end = tx_start + r;
+      start = tx().start() - l;
+      end = tx().start() + r;
     } else {
-      start = tx_end + l;
-      end = tx_end - r;
+      start = tx().end() + l;
+      end = tx().end() - r;
     }
-    return interval{sdb, chr_, start, end, idx, strand};
+    return inv{ref(), chr(), start, end, strand};
   };
   interval get_promoter(const int &l, const int &r) {
     if (noncoding()) {
       std::cerr << "Gene at " << idx << " is noncoding, no promoter"
                 << std::endl;
-      return interval();
+      return inv{};
     }
     return get_p(l, r, strand);
   };
@@ -98,7 +97,7 @@ public:
     if (noncoding()) {
       std::cerr << "Gene at " << idx << " is noncoding, no promoter"
                 << std::endl;
-      return interval();
+      return inv{};
     }
     return get_p(l, r, !strand);
   };
@@ -108,7 +107,7 @@ public:
     }
     return false;
   };
-  bool operator==(const gene &another) { return (idx == another.idx); };
-  bool operator!=(const gene &another) { return (idx != another.idx); };
+  bool operator==(const gene &another) { return (cds() == another.cds()); };
+  bool operator!=(const gene &another) { return (cds() != another.cds()); };
 };
 #endif

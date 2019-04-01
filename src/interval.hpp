@@ -13,6 +13,7 @@
 
 struct inv {
   inv() { _inv->set_len(-1); };
+  inv(genomestore::Interval &&inv) { *_inv = inv; };
   inv(uint32_t start, uint32_t len, bool strand) {
     _inv->set_start(start);
     _inv->set_len(len);
