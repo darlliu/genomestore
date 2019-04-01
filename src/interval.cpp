@@ -2,7 +2,7 @@
 #define INTERVAL_CPP
 #include "interval.hpp"
 
-const bool inv::operator==(const inv &another) {
+const bool inv::operator==(const inv &another) const {
   return ((ref() == another.ref()) && (chr() == another.chr()) &&
           (start() == another.start()) && (len() == another.len()) &&
           (strand() == another.strand()));

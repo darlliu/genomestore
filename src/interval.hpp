@@ -13,7 +13,7 @@
 
 struct inv {
   inv() { _inv->set_len(-1); };
-  inv(genomestore::Interval &&inv) { *_inv = inv; };
+  inv(genomestore::Interval ii) { *_inv = ii; };
   inv(uint32_t start, uint32_t len, bool strand) {
     _inv->set_start(start);
     _inv->set_len(len);
@@ -43,8 +43,10 @@ struct inv {
   const std::string chr() const { return _inv->chr(); };
   const std::string seqs() const { return _inv->seqs(); };
   const std::string info() const;
-  const bool operator==(const inv &another);
-  const bool operator!=(const inv &another) { return !(*this == another); };
+  const bool operator==(const inv &another) const;
+  const bool operator!=(const inv &another) const {
+    return !(*this == another);
+  };
   const bool operator<(const inv &another);
   inv operator+(const inv &another);
   inv operator-(const inv &another);
@@ -54,15 +56,4 @@ private:
   std::unique_ptr<genomestore::Interval> _inv =
       std::make_unique<genomestore::Interval>();
 };
-
-template <typename T>
-void serialize_to_db(basedb &bdb, const std::string &&key, T &val) {
-  bdb.setdb(key, val.SerializeAsString(), false);
-}
-
-template <typename T>
-void deserialize_from_db(basedb &bdb, const std::string &&key, T &val) {
-  auto _ss = bdb.getdb(key);
-  val.ParseFromString(_ss);
-}
 #endif
