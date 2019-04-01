@@ -16,7 +16,7 @@ class gene {
 private:
   std::unique_ptr<genomestore::Gene> _gene =
       std::make_unique<genomestore::Gene>();
-  std::multiset<inv> introns, exons;
+  std::multiset<inv> exons;
 
 public:
   gene(){};
@@ -49,15 +49,6 @@ public:
       exons.insert(inv{i});
     }
   };
-  void add_intron(inv &&i) {
-    auto exp = _gene->mutable_introns();
-    exp->Add()->CopyFrom(i.data());
-  };
-  void init_introns() {
-    for (auto &i : _gene->introns()) {
-      introns.insert(inv{i});
-    }
-  };
   inv utr(const bool);
   inv utr5();
   inv utr3();
@@ -70,6 +61,9 @@ public:
   };
   const bool operator!=(const gene &another) const {
     return (cds() != another.cds());
+  };
+  const bool operator<(const gene &another) const {
+    return (cds() < another.cds());
   };
 };
 #endif
