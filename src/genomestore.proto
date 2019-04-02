@@ -32,3 +32,18 @@ message Gene {
     repeated Interval exons = 7;
     repeated Interval introns = 8;
 }
+
+message Genome {
+    repeated string id = 1;
+}
+
+message Variant {
+    string allele = 1;
+    repeated float frequency = 2;
+}
+
+message Snp {
+    uint32 rsid = 1;
+    string ref = 2;
+    repeated Variant vars = 3;
+}
